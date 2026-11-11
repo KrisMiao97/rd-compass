@@ -32,6 +32,6 @@
 
 **What's new**　This version adds a WorkBuddy import package, bilingual guides and a no-account demo built from fictional design notes.
 
-## 导入与首用
+## 获取技能与首用
 
-在 WorkBuddy 的技能页面选择「添加技能 → 上传技能」，使用同目录 ZIP。运行合成演示时，技能可用随包数据在本地生成 HTML。生成报告需要可运行 Python 3.10+ 的命令工具。真实检索取决于当前环境已授权的材料和连接器。[WorkBuddy 官方上传说明](https://www.workbuddy.cn/docs/workbuddy/From-Beginner-to-Expert-Guide/Function-Description/Skills-Market)
+打开 [WorkBuddy 研发罗盘技能分享页](https://www.workbuddy.cn/share/asset?shareCode=esemC6pAN0SejrTocd72G5&sig=wvpo9epwGbdBVx04)获取技能。运行合成演示时，技能可用随包数据在本地生成 HTML。生成报告需要可运行 Python 3.10+ 的命令工具。真实检索取决于当前环境已授权的材料和连接器。[WorkBuddy 官方上传说明](https://www.workbuddy.cn/docs/workbuddy/From-Beginner-to-Expert-Guide/Function-Description/Skills-Market)

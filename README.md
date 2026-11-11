@@ -4,7 +4,7 @@
 
 **从产品、公司或已有技术路线出发，把专利和技术资料整理成下一代产品的候选机会，并说明什么条件会改变取舍。**
 
-[下载免账号互动演示](docs/rd-compass-synthetic-demo.zip?raw=1) · [查看合成输入](rd-compass/references/synthetic-demo.json) · [下载 WorkBuddy 更新包](workbuddy/rd-compass-workbuddy-0.3.1.zip?raw=1)
+[下载免账号互动演示](docs/rd-compass-synthetic-demo.zip?raw=1) · [查看合成输入](rd-compass/references/synthetic-demo.json) · [获取 WorkBuddy 技能](https://www.workbuddy.cn/share/asset?shareCode=esemC6pAN0SejrTocd72G5&sig=wvpo9epwGbdBVx04)
 
 ## 无需账号的合成演示
 
@@ -27,7 +27,7 @@
 ## 如何开始
 
 - **支持 Agent Skills 的工具**：安装本仓库的 [rd-compass](rd-compass/) 目录，再指定一个产品、技术路线或一组材料。例如：“使用研发罗盘研究桌面加湿器。比较原位擦拭和把部件拿到水池冲洗的方案，说明已有证据、改进机会和成立条件。”
-- **WorkBuddy**：在技能页面选择「添加技能 → 上传技能」，导入 [WorkBuddy ZIP](workbuddy/rd-compass-workbuddy-0.3.1.zip?raw=1)。[官方上传说明](https://www.workbuddy.cn/docs/workbuddy/From-Beginner-to-Expert-Guide/Function-Description/Skills-Market)
+- **WorkBuddy**：打开[研发罗盘技能分享页](https://www.workbuddy.cn/share/asset?shareCode=esemC6pAN0SejrTocd72G5&sig=wvpo9epwGbdBVx04)获取技能。
 - **本地复现演示**：从仓库根目录运行下列命令。需要 Python 3.10 或更新版本，脚本使用标准库。
 
 ```sh

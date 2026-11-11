@@ -4,7 +4,7 @@
 
 **Turn patent and technical material into candidate product opportunities, with evidence for the trade-offs and conditions that could change the decision.**
 
-[Download the no-account interactive demo](docs/rd-compass-synthetic-demo.zip?raw=1) · [View the synthetic input](rd-compass/references/synthetic-demo.json) · [Download the WorkBuddy package](workbuddy/rd-compass-workbuddy-0.3.1.zip?raw=1)
+[Download the no-account interactive demo](docs/rd-compass-synthetic-demo.zip?raw=1) · [View the synthetic input](rd-compass/references/synthetic-demo.json) · [Get the WorkBuddy skill](https://www.workbuddy.cn/share/asset?shareCode=esemC6pAN0SejrTocd72G5&sig=wvpo9epwGbdBVx04)
 
 ## A synthetic demo you can open without an account
 
@@ -27,7 +27,7 @@ R&D Compass works with source materials directly and can reuse results from [Pat
 ## Get started
 
 - **Agent Skills hosts**: Install the [rd-compass](rd-compass/) folder. Try: “Use R&D Compass to compare cleaning concepts for a desktop humidifier. Explain which parts move, what the alternatives improve and which evidence could change the choice.”
-- **WorkBuddy**: In Skills, select Add Skill and Upload Skill, then choose the [WorkBuddy ZIP](workbuddy/rd-compass-workbuddy-0.3.1.zip?raw=1). [Official upload guide](https://www.workbuddy.cn/docs/workbuddy/From-Beginner-to-Expert-Guide/Function-Description/Skills-Market)
+- **WorkBuddy**: Open the [R&D Compass sharing page](https://www.workbuddy.cn/share/asset?shareCode=esemC6pAN0SejrTocd72G5&sig=wvpo9epwGbdBVx04) to get the skill.
 - **Rebuild the demo locally**: From the repository root, run the command below with Python 3.10 or later. The renderer uses the standard library.
 
 ```sh
