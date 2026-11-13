@@ -4,7 +4,7 @@
 
 **解释产品为什么需要某种技术、各条路线怎样工作和发展，并据此发现有条件的研发机会。** 可按任务切换到路线比较与立项准备。
 
-[下载 WorkBuddy v0.4.0 更新包](workbuddy/rd-compass-workbuddy-0.4.0.zip?raw=1) · [下载离线互动演示](docs/rd-compass-synthetic-demo.zip?raw=1) · [查看新版合成输入](rd-compass/assets/report-data.v2.example.json)
+[下载离线互动演示](docs/rd-compass-synthetic-demo.zip?raw=1) · [查看新版合成输入](rd-compass/assets/report-data.v2.example.json)
 
 ## 三种研究目的
 
@@ -33,8 +33,7 @@
 ## 使用与更新
 
 - **Agent Skills 宿主**：安装 [rd-compass](rd-compass/) 目录，使用 `$rd-compass` 或“研发罗盘”调用。
-- **WorkBuddy 更新包**：下载上方 v0.4.0 ZIP，在技能页选择“添加技能 → 上传技能”。包的根目录含 `SKILL.md`、双语说明及离线演示。参见[更新说明](workbuddy/UPDATE.md)。
-- **已有分享入口**：[研发罗盘 WorkBuddy 分享页](https://www.workbuddy.cn/share/asset?shareCode=esemC6pAN0SejrTocd72G5&sig=wvpo9epwGbdBVx04)。此处保留原入口；本仓库发布更新包不代表该分享页已更新至同一版本。
+- **WorkBuddy**：[研发罗盘分享页](https://www.workbuddy.cn/share/asset?shareCode=esemC6pAN0SejrTocd72G5&sig=wvpo9epwGbdBVx04)。
 
 可独立使用，也可复用 [专利棱镜](https://github.com/KrisMiao97/patent-perspectives) 和 patent-batch-reader 的材料、版本及实际阅读记录。真实检索依赖宿主的已授权来源，不会因安装技能获得数据库权限。
 
@@ -49,6 +48,6 @@ python -m unittest discover -s rd-compass/tests -v
 python scripts/package_release.py
 ```
 
-32 项自动测试覆盖兼容、日期、记录关联、计划边界及成果同步。另已检查离线页面、五种宽度和证据交互；测试不证明专利事实或真实阅读完成。WorkBuddy 包已解压运行检查，未声明在客户端完成导入。
+32 项自动测试覆盖兼容、日期、记录关联、计划边界及成果同步。另已检查离线页面、五种宽度和证据交互；测试不证明专利事实或真实阅读完成。
 
 [研究工作流](rd-compass/references/research-workflow.md) · [设计规范](rd-compass/DESIGN.md) · [数据约定](rd-compass/references/output-format.md) · [版本记录](CHANGELOG.md) · [WorkBuddy 双语文案](workbuddy/marketplace-copy.md)

@@ -4,7 +4,7 @@
 
 **Explain why a product needs a technology, how existing approaches work and evolve, and which product changes are worth investigating.** Choose a report structure that fits the research question.
 
-[Download WorkBuddy v0.4.0](workbuddy/rd-compass-workbuddy-0.4.0.zip?raw=1) · [Download the offline demo](docs/rd-compass-synthetic-demo.zip?raw=1) · [View the new synthetic input](rd-compass/assets/report-data.v2.example.json)
+[Download the offline demo](docs/rd-compass-synthetic-demo.zip?raw=1) · [View the new synthetic input](rd-compass/assets/report-data.v2.example.json)
 
 ## Three research purposes
 
@@ -32,7 +32,7 @@ Fixed and removable connections illustrate how maintenance access differs. All s
 
 ## Get started
 
-Install the [rd-compass](rd-compass/) folder in an Agent Skills host. For WorkBuddy, upload the v0.4.0 ZIP through **Add skill → Upload skill**; see [update instructions](workbuddy/UPDATE.md). The [existing WorkBuddy sharing page](https://www.workbuddy.cn/share/asset?shareCode=esemC6pAN0SejrTocd72G5&sig=wvpo9epwGbdBVx04) is retained; publishing this package does not update that listing automatically.
+Install the [rd-compass](rd-compass/) folder in an Agent Skills host. For WorkBuddy, see the [R&D Compass sharing page](https://www.workbuddy.cn/share/asset?shareCode=esemC6pAN0SejrTocd72G5&sig=wvpo9epwGbdBVx04).
 
 Use the skill independently or reuse records from [Patent Perspectives](https://github.com/KrisMiao97/patent-perspectives) or patent-batch-reader. Real research uses your material and authorized data sources. Instructions and report text are primarily Chinese; the WorkBuddy entry has bilingual discovery metadata.
 
@@ -45,6 +45,6 @@ python -m unittest discover -s rd-compass/tests -v
 python scripts/package_release.py
 ```
 
-32 automated tests pass. Offline reports were checked at five viewport widths. The WorkBuddy ZIP is checked by extraction and execution, not by claiming a completed client import. These checks do not validate patent facts or prove a source was read.
+32 automated tests pass. Offline reports were checked at five viewport widths. These checks do not validate patent facts or prove a source was read.
 
 [Changelog](CHANGELOG.md) · [Data format](rd-compass/references/output-format.md) · [WorkBuddy listing copy](workbuddy/marketplace-copy.md)
