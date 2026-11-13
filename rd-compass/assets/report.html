@@ -7,15 +7,25 @@
 @media(max-width:620px){.figure-hint{display:block;margin-bottom:5px;font-weight:700}.wrap{width:calc(100% - 28px)}.top .wrap{align-items:flex-start;flex-direction:column;padding:10px 0;gap:5px}.top nav{gap:4px 13px}.top a{font-size:13px}main{padding-top:22px}h1{font-size:27px}h2{font-size:23px}.executive{padding:18px;margin-top:16px}.route{padding:17px}.timeline,.evidence-list{grid-template-columns:1fr}.states{display:block}.states span{display:block}.comparison th,.comparison td{padding:11px;font-size:14px}.comparison th:first-child{width:32%}.table-wrap.generic table,.table-wrap.generic tbody,.table-wrap.generic tr,.table-wrap.generic td{display:block;width:100%}.table-wrap.generic thead{display:none}.table-wrap.generic td{border:0;padding:6px 12px}.table-wrap.generic tr{padding:10px 0;border-bottom:1px solid var(--line)}.table-wrap.generic td::before{content:attr(data-label) '：';font-weight:750}.route-grid{gap:16px}section{margin-top:30px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
 @media print{.top,.toolbar,.filter,.compare-control{display:none!important}body{background:white;font-size:11pt}.wrap{width:100%;max-width:none}main{padding:0}.executive,.route{break-inside:auto}.comparison [data-column]{display:table-cell!important}.comparison th:first-child{width:18%}.evidence-list,.timeline,.periods{display:block}.evidence-item,.timeline li,.period{break-inside:avoid;margin-bottom:12px}.evidence-item .e-detail{display:block}.table-wrap{overflow:visible}.route-grid{display:block}.route-grid>.steps{display:block}.route figure{max-width:600px;margin:10px 0}.figure-scroll{overflow:visible}.figure-scroll img{min-width:0}.empty{display:none}.steps li{break-inside:avoid}a{color:var(--ink)}}
+/* Keep expanded research navigation usable without covering section headings. */
+.top nav{min-width:0}.top .wrap{min-width:0}
+@media(max-width:950px){.top .wrap{align-items:stretch;flex-direction:column;gap:5px;padding-top:8px;padding-bottom:8px}.top nav{flex-wrap:nowrap;overflow-x:auto;max-width:100%;padding-bottom:5px}.top nav a{white-space:nowrap;flex:none}html{scroll-padding-top:118px}.route,.evidence-item{scroll-margin-top:118px}}
+#catalog table{table-layout:auto;min-width:720px}#catalog td{max-width:260px}
+@media(max-width:620px){#catalog table{min-width:0}#catalog td{max-width:none}}
 </style></head><body><div id="content"><!-- REPORT_BODY --></div>
-<noscript><style>.comparison [data-column]{display:table-cell!important}.comparison{min-width:740px}.compare-control,.filter,.toolbar{display:none!important}</style><p class="wrap">脚本未启用；正文、证据详情和来源仍可阅读，筛选暂不可用。</p></noscript>
+<noscript><style>.comparison [data-column]{display:table-cell!important}.comparison{min-width:740px}.compare-control,.filter,.toolbar{display:none!important}/* Keep expanded research navigation usable without covering section headings. */
+.top nav{min-width:0}.top .wrap{min-width:0}
+@media(max-width:950px){.top .wrap{align-items:stretch;flex-direction:column;gap:5px;padding-top:8px;padding-bottom:8px}.top nav{flex-wrap:nowrap;overflow-x:auto;max-width:100%;padding-bottom:5px}.top nav a{white-space:nowrap;flex:none}html{scroll-padding-top:118px}.route,.evidence-item{scroll-margin-top:118px}}
+#catalog table{table-layout:auto;min-width:720px}#catalog td{max-width:260px}
+@media(max-width:620px){#catalog table{min-width:0}#catalog td{max-width:none}}
+</style><p class="wrap">脚本未启用；正文、证据详情和来源仍可阅读，筛选暂不可用。</p></noscript>
 <script id="report-data" type="application/json">__REPORT_DATA__</script>
 <script>
 const data=JSON.parse(document.getElementById('report-data').textContent);
 const field=document.getElementById('compare-field');field?.addEventListener('change',()=>document.querySelector('.comparison').dataset.field=field.value);
 const search=document.getElementById('e-search'),filter=document.getElementById('e-filter');
 const entries=[...document.querySelectorAll('.evidence-item')];
-function filterEvidence(){const term=search.value.trim().toLowerCase();let count=0;entries.forEach(el=>{el.hidden=!(el.textContent.toLowerCase().includes(term)&&(!filter.value||el.dataset.routes.split(' ').includes(filter.value)));if(!el.hidden)count++});document.getElementById('e-count').textContent=count+' 个条目';document.getElementById('e-empty').hidden=count!==0}
+function filterEvidence(){const term=search.value.trim().toLowerCase();let count=0;entries.forEach(el=>{el.hidden=!(el.textContent.toLowerCase().includes(term)&&(!filter.value||el.dataset.routes.split(' ').includes(filter.value)));if(!el.hidden)count++});document.getElementById('e-count').textContent=count+(data.schema_version===2?' 张详细证据卡':' 个条目');document.getElementById('e-empty').hidden=count!==0}
 search?.addEventListener('input',filterEvidence);filter?.addEventListener('change',filterEvidence);
 document.getElementById('e-reset')?.addEventListener('click',()=>{search.value='';filter.value='';filterEvidence();search.focus()});
 document.addEventListener('click',event=>{const link=event.target.closest('.e-link');if(!link)return;const el=document.getElementById(link.hash.slice(1));if(!el)return;search.value='';filter.value='';filterEvidence();el.open=true;requestAnimationFrame(()=>el.querySelector('summary').focus({preventScroll:true}))});

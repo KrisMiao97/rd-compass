@@ -1,60 +1,72 @@
-# 输出模版与数据约定
+# 输出数据与同源交付（schema 2）
 
-先读根目录 DESIGN.md。报告内容先按 assets/report-outline.md 组织，再填写结构化数据并生成；不要为迎合版式减少必要限定。
+新研究采用 schema_version: 2。兼容旧 schema 1，旧格式见 [旧约定](output-format-v1.md)；旧示例和历史报告继续可运行，但不自动获得新增的日期、台账或语义验收。新增字段必须按实际来源填写，禁止猜造。schema 2 可只解释技术，不强制生成未来方向。
 
-## 生成方法
-
-使用 Python 3.10 或以上，无第三方运行依赖：
+## 命令
 
 ```text
-python scripts/render_report.py research-data.json --output report.html
+python scripts/render_report.py assets/report-data.v2.example.json --bundle demo
+python scripts/render_report.py --check-bundle demo
+python scripts/render_report.py INPUT.json --output report.html
+python -m unittest discover -s tests -v
 ```
 
-命令中的脚本路径相对 Skill 根目录；输入和输出可使用绝对路径。生成结果是可独立打开的单文件 HTML。HTML 内嵌数据、样式、交互和已提供的图，只有点击外部来源时才联网。assets/report.html 是生成器使用的页面母版，不是研究成品；不要直接交付未填内容的母版。
+--bundle 生成 report.html、catalog.html、reading.csv、research-data.json 和 manifest.json。单文件报告也内含逐件记录和完整数据，转发后不依赖目录页。清单记录各文件哈希、数据版本与派生计数；--check-bundle 可发现被替换成旧版的文件。所有内容先校验并生成，再逐文件替换，最后写清单；中途系统故障仍可能产生不完整批次，应运行校验并从原输入重新生成，不能声称整个目录事务原子提交。
 
-## 必填数据
+--output 只生成单文件报告，不会同步目录中的其他历史文件；正式多成果更新使用 --bundle。生成前输入不合法不覆盖既有成果。内容指纹检查不验证专利事实。
 
-| 字段 | 内容 |
+## 顶层字段
+
+| 字段 | 约定 |
 |---|---|
-| schema_version | 固定为 1；格式变更时同步生成器和本文 |
-| title / cutoff | 对象与研究题名；证据截止日为 YYYY-MM-DD，不能用修订日冒充 |
-| finding | 本轮已有证据支持的具体发现，包含关键范围 |
-| opportunity | 由差异形成的产品变化与使用价值，未验证的收益按可能性表达 |
-| judgment | 当前有条件的取舍；没有全局排序也可给局部判断 |
-| boundary | 会影响理解的范围、实测或复核限制 |
-| directions | 方向数组，可为零；数量不固定，D 编号唯一 |
-| evidence | 证据数组，可为零；E 编号唯一 |
+| schema_version | 2 |
+| data_version | 本次冻结输入的版本字符串；不能代替资料截止日 |
+| modes | technology、opportunity、decision 的非空数组，可组合 |
+| title / cutoff / finding / boundary | 题名、YYYY-MM-DD 资料截止日、已有发现、影响结论的边界 |
+| background | title/text/evidence 数组；technology 模式必填，可如实说明背景未知 |
+| current_landscape | 当前已查范围内的技术格局；technology 必填 |
+| decision_context | decision 必填；写目标、限制、偏好及关键未知，不能默认项目目标 |
+| opportunity / judgment | 可选的产品机会和条件判断，纯技术理解不强填机会 |
+| records / routes / directions / evidence | 四个数组，可为空，按本次研究范围填写 |
+| timeline | 可选事件数组；没有历史材料不强造时间线 |
+| plan / plan_requested | 可选 title/text 数组；decision 或明确 plan_requested:true 才展示计划。该布尔值须来自真实任务要求，不能为通过检查自设授权 |
+| worklog / appendix / references / decision_boundary | 沿用旧约定的补证记录、附录、来源与条件边界 |
 
-方向包含 id、name、benefit、tradeoff、judgment、evidence_state、decision_state。状态是两个不同字段，不共用一个综合标签。reasoning 是按材料披露、方案差异、可能能力、成立条件、尚存假设排列的五项；每项有 title、text、evidence，最后一个字段为证据编号数组。标题应写具体主张，不直接填角色名。
+## 逐件记录 records
 
-conditions 为条件分支数组，每项有 if 与 then，说明一种情况出现后如何改变取舍。不是默认试验已经发生，也不自动变成立项通过。可选 figure 是内嵌 PNG、JPEG 或 SVG 的 base64 数据 URL，caption 为必填图注；图中的文字同样需要实际检查，生成器不判断图文真实性。
+每条包含 id、document_id（准确文献号与版本）、in_sample（布尔）、reading、read_scope（实际阅读范围）、review。
 
-证据包含 id、title、summary、source_role、in_sample、location、disclosure、limitation；in_sample 必须明确填 true 或 false。directions 为关联方向数组；documents 为 number 与 url 的数组，可容纳专利、论文、产品及标准。publication 可写公开日或资料日期；没有日期时省略，不编造。source_role 区分直接披露、相似机制、跨领域参照或实测等，不只是“可信”。
+- reading：not_started / screened / targeted / complete；complete 只指 read_scope 所约定的完整主阅读范围，必须另说明是否完整权项、说明书、必要附图，局部段落补读用 targeted。
+- review：not_reviewed / self_checked / independent。independent 还需 reviewer 和 review_scope，且应确有独立原文阅读，不是模型改名。
+- 可选 application_id、family_id、source_reader、source_record_id、source_snapshot、row_number、row_number_basis 等来源字段可随快照保留。程序原样保留这些字段，不声称自动完成上游适配或同族核验。
+- 上游清单是权威来源时，由分析者映射/引用其稳定ID并冻结快照；本格式不另建长期并行台账。上游改变后重新导出再渲染。
 
-## 可选模块
+阅读与复核是不同维度，分别统计，不能把两个维度的数量相加。主样本与补充记录分别计数。没有完整申请/同族映射时不能凭记录数推算申请数或同族数；需要这些统计时先核验并明确口径。
 
-- scope：短句数组，展示已核实的样本数量、去重口径及阅读范围。
-- timeline：按公开日升序的 date、title、change、evidence 数组；change 写部件、动作及变化，不能只写文献题名。
-- periods：label、conclusion、basis，逐期解释“主要在解决什么”，无可支持的跨期比较时省略。
-- worklog：question、action、finding、remaining，说明关键疑问、实际完成的补证、判断变化和剩余未知。
-- decision_boundary：本轮能支持的研究或立项判断；缺省沿用 boundary。
-- references：补充来源与方法链接的 title、url 数组；仅允许 HTTP(S)，显示在附录。
-- appendix：纯文本段落数组，保留检索式、记录口径、排除理由和方法；换行会保留。
+## 现有路线 routes 与候选方向 directions
 
-生成器将纯文本转义，不执行输入中的 HTML。引用必须解析到实际 E 条目；外部来源限 HTTP(S)。它会拒绝编号重复、引用丢失、方向论证缺项及时间乱序，但不会证明原文正确、检索全面、数量真实或收益已验证；这些由研究核查负责。
+route 包含 id、name、task、mechanism、development、limitations、evidence。说明现有实现，不自动成为候选方向。历史未明可在 development 中如实说明只完成结构对照。mechanism 用完整过程解释；静态结构不强填触发动作。
 
-## 最小结构示例
+direction 沿用 name/benefit/tradeoff/judgment/evidence_state/decision_state、五项 reasoning、conditions 及可选内嵌 figure/caption，另有 route_ids、judgment_kind、rationale。route_ids 允许为空（例如来自新的替代原理），否则必须对应实际路线。
 
-assets/report-data.example.json 给出无已形成方向的合法起点，内容明确处于模版准备状态。实际研究应替换全部文案，并逐项填入已经完成的分析。不能把示例空值或结构检查通过当作研究完成。
+judgment_kind 为 conditional_candidate、research_priority、comparison_baseline、performance_comparison。前三类不强求实测；性能比较还需 comparison_conditions 和 comparison_evidence。程序只检查字段与引用，证据是否可比及结论强度必须内容复核。非决策模式不展示候选的决策阶段，但保留原数据。
 
-有方向时一项 reasoning 的写法如下，E1 必须在证据数组中存在：
+## 证据 evidence
 
-```json
-{"title":"底座可单独解扣，握持件仍采用紧固连接","text":"这里用完整句子说明原文中的部件位置和动作，并说明与简单基线的差异。","evidence":["E1"]}
-```
+沿用 E 编号、title、summary、source_role、in_sample、location、disclosure、limitation、directions、documents。record_ids 可关联零到多条实际记录；零条适用于未纳入逐件台账的背景资料，仍必须准确引用来源。卡片存在不等于文献已读完。
 
-## 接续更新
+documents 每项为 number/url，可增加 locations:[{statement, locator}]，在卡片中分别展示具体陈述与页码、段落或网页位置。来源链接只接受 HTTP(S)。背景事实也可直接放 references；影响关键结论时应进入可定位证据，不能用背景身份降低所需核查。
 
-修改研究数据后重新生成 HTML，保留上一版数据和实际差异。更正材质、位置或归组时同步摘要、方向判断、图注、时间节点与证据索引。新增补充资料不自动改变主样本分母。生成失败时不覆盖原报告；成功后仍需按 DESIGN.md 做视觉与交互验收。
+卡片与记录可多对多关联，既不能要求卡数等于已读数，也不能把卡数当作所有正文来源的数量。records.in_sample 决定记录统计；evidence.in_sample 是该卡的统计说明，混合来源卡应在 source_role 与 limitation 写清，不据卡片倒推原始分母。
 
-修改生成器后运行 `python -m unittest discover -s tests -v`，检查不同方向数量、引用完整性、文本转义和失败时保留原报告。它不代替画面验收，也不检查专利事实。
+## 时间记录 timeline
+
+每项含 date（ISO日期或 null）、date_type（publication / grant / product_release / source_date / unknown）、document_id、title、change、evidence。已知日期相对升序，未知日期可保留；date_type 不由文献后缀自动生成。document_id 必须能对应所引证据的 documents.number 或关联 records.document_id。
+
+可选 earliest_verified_disclosure:true 仅适用于已知 publication 事件，还需 disclosure_locator 和 search_scope。表示本次已查范围内较早披露，不是行业首次。授权事件在较早公开未取得时仍可显示，不能借授权日声称技术起点。文献公开日、授权日、产品时间分别取证，继承/替代关系不是该字段推导结果。
+
+新版不自动生成主题化时期结论；需要解释发展时写在路线 development 中并引用依据。不能根据日期分箱替读者推导技术阶段。
+
+## 内容与页面验证
+
+内容按 reader-review.md 审阅。结构检查、来源真实性、研究理解和浏览器交互是独立检查，分别记录。默认示例均为合成材料。合成测试成功不能称水壶真实报告已经重跑通过。

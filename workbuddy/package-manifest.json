@@ -1,0 +1,60 @@
+{
+  "version": "0.4.0",
+  "layout": "SKILL.md at archive root",
+  "package": "rd-compass-workbuddy-0.4.0.zip",
+  "sha256": "c3475104a9ee8d8f3b2bdc5decfcc2a0fc715b4a2e881be659bec3d0a35a34ef",
+  "source_files_sha256": {
+    "CHANGELOG.md": "67cb573d2cde9e6bb4315167dd2e1511299c06526b13614ac0554bb97da82fb9",
+    "DESIGN.md": "89351e2b793275e7b54abf3b0fd8557bf90fa4bb852e68fcd1592c72f8675c14",
+    "MAINTENANCE.md": "b0025979de97e5ad43111916045b2b90e710757cfe9c040f3e09f461593207fc",
+    "README.md": "ec59ce7114a872b44cc5388f0a5f3f0c258d1d2c5a8d4c74f1523c0239d8bd59",
+    "SKILL.md": "a0540f3cc66c68ee2a178089598faabb5d3bedafbc2841da24d7fc21a7440b26",
+    "agents/openai.yaml": "37b90749e89fc52a43700d64bcbf270db4c6d7f2554633cc1c45324ad04995cc",
+    "assets/report-data.example.json": "71dcf35aa916e247b233fd2a19d65df1150261f28deef1a2365429d75fd01a26",
+    "assets/report-data.v2.example.json": "b0d859575b87ae34de60c9539dbaa40a69ee72ef6dac9b9df1f9929b6e6ddd4f",
+    "assets/report-outline.md": "6b6ac9a1c2b3836eb74aa01908650c266b90b0ff0d86be59d9470d2044776521",
+    "assets/report.html": "22995add320683561c2247aaac09fecf2efdb22023639d0e68d2a0a0673c81c2",
+    "references/evidence-and-decisions.md": "8699411924b9233d59df29097bc5d54681f2b2fe5453ad47076166a44413f23b",
+    "references/output-format-v1.md": "50efe57e4422f0747cb5f1b31e773faf5ec7534c16999831672fca2bc4f45c47",
+    "references/output-format.md": "959e4e8856014b5dfe726b421b1a75c7eb8ee4512ea39ed5d1c75efe67ca6cca",
+    "references/reader-review.md": "e745c5bb98064248a9fe35c5dc902b948820e71b114bd705746e00218acdfbfe",
+    "references/research-workflow.md": "f4c377601802f28d854fb23af2d19f7aec8e585543f3eb65cd4331d9ef0b52bd",
+    "references/synthetic-demo.json": "e3c24849e265ffb6610eb3ed0c8a7349a481cba488e356100db5c484326aa1f9",
+    "scripts/render_report.py": "ec2ad02bf78ac5322b0b683dbca38757884969fd5ff21c9c0431f952b69df795",
+    "scripts/research_model.py": "706e003150369c0ba8db56fc0e9027036ff929c7826047b2884f809fdad1eb29",
+    "tests/test_render_report.py": "ad47339f5104360d430f0865d7f1471ca649dd16f7c9460440c21ca056401501",
+    "tests/test_research_model.py": "40fcfab3a8209d6bd80944f7ad162a43abe138206d3c4370dacec067b5fe1730"
+  },
+  "package_files_sha256": {
+    "CHANGELOG.md": "67cb573d2cde9e6bb4315167dd2e1511299c06526b13614ac0554bb97da82fb9",
+    "DESIGN.md": "89351e2b793275e7b54abf3b0fd8557bf90fa4bb852e68fcd1592c72f8675c14",
+    "MAINTENANCE.md": "b0025979de97e5ad43111916045b2b90e710757cfe9c040f3e09f461593207fc",
+    "README.md": "ec59ce7114a872b44cc5388f0a5f3f0c258d1d2c5a8d4c74f1523c0239d8bd59",
+    "README_WORKBUDDY.md": "d82000e78321578a8a82bdfac220c3d00fe9ef421e38ba1f6bfbf7f04fde2da6",
+    "SKILL.md": "f93db3d2ee426cde50abdf490b841b3a40f34c17d25d053034539c4a510fa61e",
+    "agents/openai.yaml": "37b90749e89fc52a43700d64bcbf270db4c6d7f2554633cc1c45324ad04995cc",
+    "assets/report-data.example.json": "71dcf35aa916e247b233fd2a19d65df1150261f28deef1a2365429d75fd01a26",
+    "assets/report-data.v2.example.json": "b0d859575b87ae34de60c9539dbaa40a69ee72ef6dac9b9df1f9929b6e6ddd4f",
+    "assets/report-outline.md": "6b6ac9a1c2b3836eb74aa01908650c266b90b0ff0d86be59d9470d2044776521",
+    "assets/report.html": "22995add320683561c2247aaac09fecf2efdb22023639d0e68d2a0a0673c81c2",
+    "demo/index.html": "aee2959125adb9f4e3bbd4cbc40a298b2bcd38ac22d8489564f24c0a4549068c",
+    "references/evidence-and-decisions.md": "8699411924b9233d59df29097bc5d54681f2b2fe5453ad47076166a44413f23b",
+    "references/output-format-v1.md": "50efe57e4422f0747cb5f1b31e773faf5ec7534c16999831672fca2bc4f45c47",
+    "references/output-format.md": "959e4e8856014b5dfe726b421b1a75c7eb8ee4512ea39ed5d1c75efe67ca6cca",
+    "references/reader-review.md": "e745c5bb98064248a9fe35c5dc902b948820e71b114bd705746e00218acdfbfe",
+    "references/research-workflow.md": "f4c377601802f28d854fb23af2d19f7aec8e585543f3eb65cd4331d9ef0b52bd",
+    "references/synthetic-demo.json": "e3c24849e265ffb6610eb3ed0c8a7349a481cba488e356100db5c484326aa1f9",
+    "scripts/render_report.py": "ec2ad02bf78ac5322b0b683dbca38757884969fd5ff21c9c0431f952b69df795",
+    "scripts/research_model.py": "706e003150369c0ba8db56fc0e9027036ff929c7826047b2884f809fdad1eb29",
+    "tests/test_render_report.py": "ad47339f5104360d430f0865d7f1471ca649dd16f7c9460440c21ca056401501",
+    "tests/test_research_model.py": "40fcfab3a8209d6bd80944f7ad162a43abe138206d3c4370dacec067b5fe1730"
+  },
+  "adapter_overrides": [
+    "SKILL.md"
+  ],
+  "added": [
+    "README_WORKBUDDY.md",
+    "demo/index.html"
+  ],
+  "validation_boundary": "Archive structure, core file equality and renderer execution; not a WorkBuddy client import."
+}

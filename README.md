@@ -1,39 +1,54 @@
 # 研发罗盘 · R&D Compass
 
-简体中文 · [English](README.en.md)
+简体中文 · [English](README.en.md) · **v0.4.0**
 
-**从产品、公司或已有技术路线出发，把专利和技术资料整理成下一代产品的候选机会，并说明什么条件会改变取舍。**
+**解释产品为什么需要某种技术、各条路线怎样工作和发展，并据此发现有条件的研发机会。** 可按任务切换到路线比较与立项准备。
 
-[下载免账号互动演示](docs/rd-compass-synthetic-demo.zip?raw=1) · [查看合成输入](rd-compass/references/synthetic-demo.json) · [获取 WorkBuddy 技能](https://www.workbuddy.cn/share/asset?shareCode=esemC6pAN0SejrTocd72G5&sig=wvpo9epwGbdBVx04)
+[下载 WorkBuddy v0.4.0 更新包](workbuddy/rd-compass-workbuddy-0.4.0.zip?raw=1) · [下载离线互动演示](docs/rd-compass-synthetic-demo.zip?raw=1) · [查看新版合成输入](rd-compass/assets/report-data.v2.example.json)
 
-## 无需账号的合成演示
+## 三种研究目的
 
-桌面加湿器有两种清洗设计。一种扩大固定水槽开口，让手和清洁布更容易够到内壁。另一种让水槽和短导水件一起取出，把倒水、冲洗和晾干移到水池边。报告解释了为什么残水和复装会改变两条路线的取舍。
+| 目的 | 报告重点 |
+|---|---|
+| 技术理解与演进 | 产品背景、实际问题、技术时间、现有路线及其变化 |
+| 研发机会探索 | 拟改善的能力、比较依据、代价与成立条件 |
+| 路线比较与立项准备 | 明确目标和约束下的取舍，任务需要时单列验证安排 |
 
-[![研发罗盘合成演示。首屏展示研究发现、产品机会和当前判断，随后比较两条清洗路线。](docs/preview.png)](docs/rd-compass-synthetic-demo.zip?raw=1)
+模式可以组合。现有技术路线与未来研发方向分别组织，不把每类专利自动变成一个机会，不默认写成试验任务书。研究优先、比较基准和性能优越使用不同依据。
 
-演示材料和日期均为虚构。下载并解压演示包，用浏览器打开 `index.html`，即可离线比较方向、点击证据编号、筛选资料和下载样例数据。浏览演示无需账号、API 密钥、Python 或安装技能。
+## 无需账号的新版演示
 
-## 什么时候用
+[![过滤与维护合成演示：产品背景、现有路线、候选方向和可回查证据。](docs/preview.png)](docs/rd-compass-synthetic-demo.zip?raw=1)
 
-| 你已有的起点 | 研发罗盘回答什么 |
-| --- | --- |
-| 只有产品，还没决定改哪里 | 哪些技术差异可能改变使用方式，形成什么产品机会？ |
-| 选好了公司、专题或技术路线 | 同一任务有哪些可比的做法，哪些条件限制借鉴？ |
-| 已经有改进问题或几个方案 | 每条路线适用于什么条件，哪些新证据会改变选择？ |
+本例比较固定连接与可拆连接怎样影响滤面维护。材料、标识和日期全部虚构，用来演示阅读顺序、日期类型、证据定位，以及阅读状态和复核状态的区别。下载并解压后打开 `index.html`；查看页面不需要账号、API 密钥或 Python。旧版桌面加湿器数据仍保留用于兼容检查。
 
-可以独立使用，也可以接续[专利棱镜](https://github.com/KrisMiao97/patent-perspectives)或批量专利阅读的结果。分析会在影响判断时回查原文、找简单基线和相似实现，然后按“材料披露 → 方案差异 → 可能能力 → 成立条件 → 尚存假设”说明依据。报告分别说明方向是否值得研究，以及进入立项讨论还缺什么。
+## 0.4.0 的变化
 
-## 如何开始
+- 按研究目的选择结构，现有路线与候选方向可以多对多关联。
+- 区分公开、授权、产品发布与资料日期，不凭后缀猜日期或把先后当继承。
+- 阅读、复核和详细证据卡分别记录；一份资料可以定位多个具体陈述。
+- 主报告、逐件页、CSV、研究数据与清单同源生成，并检查文件是否混用了旧版。
+- 内容审阅与程序检查分开；保留 schema 1 兼容，不自动猜造迁移字段。
 
-- **支持 Agent Skills 的工具**：安装本仓库的 [rd-compass](rd-compass/) 目录，再指定一个产品、技术路线或一组材料。例如：“使用研发罗盘研究桌面加湿器。比较原位擦拭和把部件拿到水池冲洗的方案，说明已有证据、改进机会和成立条件。”
-- **WorkBuddy**：打开[研发罗盘技能分享页](https://www.workbuddy.cn/share/asset?shareCode=esemC6pAN0SejrTocd72G5&sig=wvpo9epwGbdBVx04)获取技能。
-- **本地复现演示**：从仓库根目录运行下列命令。需要 Python 3.10 或更新版本，脚本使用标准库。
+## 使用与更新
+
+- **Agent Skills 宿主**：安装 [rd-compass](rd-compass/) 目录，使用 `$rd-compass` 或“研发罗盘”调用。
+- **WorkBuddy 更新包**：下载上方 v0.4.0 ZIP，在技能页选择“添加技能 → 上传技能”。包的根目录含 `SKILL.md`、双语说明及离线演示。参见[更新说明](workbuddy/UPDATE.md)。
+- **已有分享入口**：[研发罗盘 WorkBuddy 分享页](https://www.workbuddy.cn/share/asset?shareCode=esemC6pAN0SejrTocd72G5&sig=wvpo9epwGbdBVx04)。此处保留原入口；本仓库发布更新包不代表该分享页已更新至同一版本。
+
+可独立使用，也可复用 [专利棱镜](https://github.com/KrisMiao97/patent-perspectives) 和 patent-batch-reader 的材料、版本及实际阅读记录。真实检索依赖宿主的已授权来源，不会因安装技能获得数据库权限。
+
+## 本地生成与检查
+
+Python 3.10+，仅使用标准库：
 
 ```sh
-python rd-compass/scripts/render_report.py rd-compass/references/synthetic-demo.json --output synthetic-report.html
+python rd-compass/scripts/render_report.py rd-compass/assets/report-data.v2.example.json --bundle demo
+python rd-compass/scripts/render_report.py --check-bundle demo
+python -m unittest discover -s rd-compass/tests -v
+python scripts/package_release.py
 ```
 
-真实任务使用你提供的资料和已授权的数据源。查看[研究工作流](rd-compass/references/research-workflow.md)、[报告设计规范](rd-compass/DESIGN.md)和[数据格式](rd-compass/references/output-format.md)。
+32 项自动测试覆盖兼容、日期、记录关联、计划边界及成果同步。另已检查离线页面、五种宽度和证据交互；测试不证明专利事实或真实阅读完成。WorkBuddy 包已解压运行检查，未声明在客户端完成导入。
 
-[版本记录](CHANGELOG.md) · [WorkBuddy 上架文案](workbuddy/marketplace-copy.md)
+[研究工作流](rd-compass/references/research-workflow.md) · [设计规范](rd-compass/DESIGN.md) · [数据约定](rd-compass/references/output-format.md) · [版本记录](CHANGELOG.md) · [WorkBuddy 双语文案](workbuddy/marketplace-copy.md)

@@ -1,39 +1,50 @@
 # R&D Compass · 研发罗盘
 
-[简体中文](README.md) · English
+[简体中文](README.md) · English · **v0.4.0**
 
-**Turn patent and technical material into candidate product opportunities, with evidence for the trade-offs and conditions that could change the decision.**
+**Explain why a product needs a technology, how existing approaches work and evolve, and which product changes are worth investigating.** Choose a report structure that fits the research question.
 
-[Download the no-account interactive demo](docs/rd-compass-synthetic-demo.zip?raw=1) · [View the synthetic input](rd-compass/references/synthetic-demo.json) · [Get the WorkBuddy skill](https://www.workbuddy.cn/share/asset?shareCode=esemC6pAN0SejrTocd72G5&sig=wvpo9epwGbdBVx04)
+[Download WorkBuddy v0.4.0](workbuddy/rd-compass-workbuddy-0.4.0.zip?raw=1) · [Download the offline demo](docs/rd-compass-synthetic-demo.zip?raw=1) · [View the new synthetic input](rd-compass/assets/report-data.v2.example.json)
 
-## A synthetic demo you can open without an account
+## Three research purposes
 
-Two concepts make a desktop humidifier easier to clean in different ways. A wider opening gives a hand and cloth more room to reach into a fixed basin. A removable water assembly lets users take the basin and its short water channel to the sink. The report shows how retained water, reassembly and sealing affect the choice.
+| Purpose | Main questions |
+|---|---|
+| Technical understanding and evolution | Product context, problems, dated disclosures, mechanisms and changes |
+| R&D opportunity exploration | Proposed capabilities, comparisons, costs and conditions |
+| Route comparison and project preparation | Trade-offs under stated goals and constraints, with a plan when requested |
 
-[![R&D Compass synthetic demo showing findings, product opportunities and a comparison of two cleaning concepts.](docs/preview.png)](docs/rd-compass-synthetic-demo.zip?raw=1)
+Modes can be combined. Existing approaches and future opportunities are distinct, linked concepts. Research priority and a comparison baseline do not mean superior measured performance. A technical explanation does not automatically become a test assignment.
 
-The designs and dates are fictional. Unzip the demo and open `index.html` in a browser to compare the concepts, follow evidence references, filter the source entries and export the sample data. The report interface is in Chinese. Viewing it requires no account, API key, Python installation or agent.
+## A fictional demo
 
-## When to use it
+[![A synthetic filter-maintenance report with context, approaches, opportunities and evidence.](docs/preview.png)](docs/rd-compass-synthetic-demo.zip?raw=1)
 
-| Starting point | What the skill helps answer |
-| --- | --- |
-| A product and an open brief | Which technical differences could improve a use case? |
-| A company, research topic or technical approach | How else is the same task solved, and when do the alternatives transfer? |
-| A defined problem or several concepts | Where does each concept fit, and what evidence would change the choice? |
+Fixed and removable connections illustrate how maintenance access differs. All sources, identifiers and dates are fictional. Unzip and open `index.html` to explore the Chinese-language report without an account, API key or Python. The earlier humidifier input remains available for compatibility checks.
 
-R&D Compass works with source materials directly and can reuse results from [Patent Perspectives](https://github.com/KrisMiao97/patent-perspectives) or a patent reading workflow. It checks primary disclosures when a detail affects the decision and compares alternatives against a simple baseline. Each direction explains the disclosure, the design difference, the potential capability, the conditions it depends on and the remaining assumptions. The report uses separate criteria for further research and project approval.
+## What's new
+
+- Purpose-aware report order; existing approaches and candidate opportunities are linked separately.
+- Explicit event dates and types; time order does not imply inheritance or adoption.
+- Separate reading, review and card associations, with multiple locations in one source.
+- A report, reading catalog, CSV, research data and hash manifest generated from one input.
+- Content review separated from structural checks; schema 1 remains supported without fabricated migration data.
 
 ## Get started
 
-- **Agent Skills hosts**: Install the [rd-compass](rd-compass/) folder. Try: “Use R&D Compass to compare cleaning concepts for a desktop humidifier. Explain which parts move, what the alternatives improve and which evidence could change the choice.”
-- **WorkBuddy**: Open the [R&D Compass sharing page](https://www.workbuddy.cn/share/asset?shareCode=esemC6pAN0SejrTocd72G5&sig=wvpo9epwGbdBVx04) to get the skill.
-- **Rebuild the demo locally**: From the repository root, run the command below with Python 3.10 or later. The renderer uses the standard library.
+Install the [rd-compass](rd-compass/) folder in an Agent Skills host. For WorkBuddy, upload the v0.4.0 ZIP through **Add skill → Upload skill**; see [update instructions](workbuddy/UPDATE.md). The [existing WorkBuddy sharing page](https://www.workbuddy.cn/share/asset?shareCode=esemC6pAN0SejrTocd72G5&sig=wvpo9epwGbdBVx04) is retained; publishing this package does not update that listing automatically.
+
+Use the skill independently or reuse records from [Patent Perspectives](https://github.com/KrisMiao97/patent-perspectives) or patent-batch-reader. Real research uses your material and authorized data sources. Instructions and report text are primarily Chinese; the WorkBuddy entry has bilingual discovery metadata.
+
+Python 3.10+, standard library only:
 
 ```sh
-python rd-compass/scripts/render_report.py rd-compass/references/synthetic-demo.json --output synthetic-report.html
+python rd-compass/scripts/render_report.py rd-compass/assets/report-data.v2.example.json --bundle demo
+python rd-compass/scripts/render_report.py --check-bundle demo
+python -m unittest discover -s rd-compass/tests -v
+python scripts/package_release.py
 ```
 
-For a real research task, supply your material or use data sources authorized in your host. See the [workflow](rd-compass/references/research-workflow.md), [report design guide](rd-compass/DESIGN.md) and [data format](rd-compass/references/output-format.md). The skill instructions and reference guides are in Chinese.
+32 automated tests pass. Offline reports were checked at five viewport widths. The WorkBuddy ZIP is checked by extraction and execution, not by claiming a completed client import. These checks do not validate patent facts or prove a source was read.
 
-[Changelog](CHANGELOG.md) · [WorkBuddy listing copy](workbuddy/marketplace-copy.md)
+[Changelog](CHANGELOG.md) · [Data format](rd-compass/references/output-format.md) · [WorkBuddy listing copy](workbuddy/marketplace-copy.md)

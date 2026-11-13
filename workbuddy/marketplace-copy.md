@@ -1,37 +1,35 @@
-# 研发罗盘 v0.3.1 · WorkBuddy 上架文案
+# 研发罗盘 v0.4.0 · WorkBuddy 双语文案
 
 ## 中文
 
-**名称**　研发罗盘
+**名称**：研发罗盘
 
-**短介绍**　从专利和技术资料发现下一代产品机会，比较研发路线的实现、使用价值和成立条件，生成可回查证据的报告。
+**短介绍**：解释产品技术现状与演进，发现有依据的研发机会，并按任务比较技术路线。
 
-**详情**　当团队只知道想做下一代产品，还没有选定改进目标时，研发罗盘从不同使用动作和技术实现里找候选方向。已有公司专利或技术专题时，它会比较相同任务的不同做法，回查影响判断的原文，并解释哪些差异会带来新的产品能力。报告先讲发现、机会和条件取舍，再展开结构、资料来源和仍需验证的假设。可以独立使用，也可以接续专利棱镜的研究。
+**详情**：从产品、公司、技术路线或已有专利材料出发，先解释必要的产品背景和工作机制，再按目的组织技术发展、机会探索或方案比较。现有路线与未来方向分别说明；报告、逐件阅读记录、证据卡和下载数据同源更新，关键判断可查到对应文献版本和具体位置。可以独立使用，也可接续专利棱镜或 patent-batch-reader。
 
-**试试这样用**
+**试试这样用**：
 
-1. 用包内合成材料演示桌面加湿器的两条清洗路线，并生成互动报告。
-2. 我还没决定要改进这个产品的什么功能。请从我提供的材料里找有证据的研发机会，说明哪些条件会改变取舍。
-3. 根据这批公司专利，比较同一使用任务的两种实现，说明可借鉴之处和迁移条件。
+1. 分析这批专利，先解释产品问题和各技术路线的发展，再提出有依据的研发方向。
+2. 用包内合成材料演示技术理解与机会探索，生成可离线打开的互动报告。
+3. 按明确目标比较两个方案，区分比较基准、研究优先与已验证性能。
 
-**更新说明**　新增 WorkBuddy 导入包、中英文说明和免账号合成演示。可用虚构的桌面加湿器设计稿体验方向比较、证据筛选与追溯，无需连接专利数据库。
+**更新说明**：增加三种研究模式，分开现有路线与候选方向，明确日期类型与多处引用，统一报告和阅读清单的数据来源；保留旧版数据兼容。
 
 ## English
 
-**Name**　R&D Compass
+**Name**: R&D Compass
 
-**Short description**　Find product opportunities in patents and technical material. Compare how R&D options work, what they could improve and which conditions matter, with evidence you can trace.
+**Short description**: Explain technical approaches and their evolution, explore conditional R&D opportunities, and compare options with traceable evidence.
 
-**Details**　Start with a product, a company, a technical approach or a defined problem. R&D Compass identifies candidate improvements, revisits source material when a detail affects the decision, and compares how different approaches solve the same task. The report leads with findings and trade-offs, followed by mechanisms, sources and open assumptions. Use it on its own or with results from Patent Perspectives.
+**Details**: Start with a product, company, technical approach or patent collection. Explain the context and mechanisms, then organize the report around understanding, opportunity exploration or comparison. Existing approaches and future opportunities remain distinct. Reports, reading catalogs and evidence references share one input. Use independently or reuse Patent Perspectives and patent-batch-reader results.
 
-**Try it**
+**Try it**:
 
-1. Use the bundled fictional humidifier case to compare two cleaning concepts and generate an interactive report.
-2. Use my material to identify product opportunities and explain the conditions that would change the choice.
-3. Compare two ways of solving the same task in this patent set. Explain what might transfer to our product and under what conditions.
+1. Explain this patent set's product context and technical approaches before identifying conditional opportunities.
+2. Use the bundled synthetic material to generate an offline research report.
+3. Compare two options under a stated goal, separating research priority from measured performance.
 
-**What's new**　This version adds a WorkBuddy import package, bilingual guides and a no-account demo built from fictional design notes.
+**What's new**: Purpose-aware reports, distinct approaches and opportunities, explicit event types, multiple source locations and consistent reading records. Earlier data remains supported.
 
-## 获取技能与首用
-
-打开 [WorkBuddy 研发罗盘技能分享页](https://www.workbuddy.cn/share/asset?shareCode=esemC6pAN0SejrTocd72G5&sig=wvpo9epwGbdBVx04)获取技能。运行合成演示时，技能可用随包数据在本地生成 HTML。生成报告需要可运行 Python 3.10+ 的命令工具。真实检索取决于当前环境已授权的材料和连接器。[WorkBuddy 官方上传说明](https://www.workbuddy.cn/docs/workbuddy/From-Beginner-to-Expert-Guide/Function-Description/Skills-Market)
+[下载更新包](rd-compass-workbuddy-0.4.0.zip?raw=1) · [上传与验证范围](UPDATE.md)

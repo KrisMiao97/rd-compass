@@ -13,7 +13,7 @@ ROLES = ['材料披露', '方案差异', '可能能力', '成立条件', '尚存
 def esc(value): return html.escape(str(value), quote=True)
 def para(value): return '<p>'+esc(value)+'</p>'
 
-def validate(data):
+def validate_legacy(data):
     if not isinstance(data,dict) or data.get('schema_version')!=1: raise ValueError('schema_version must be 1')
     for key in ['title','cutoff','finding','opportunity','judgment','boundary']:
         if not isinstance(data.get(key),str) or not data[key].strip(): raise ValueError(f'Missing text: {key}')
@@ -60,8 +60,8 @@ def validate(data):
         u=urlsplit(source['url'])
         if not source.get('title') or u.scheme not in ['http','https'] or not u.netloc: raise ValueError('Invalid reference source')
 
-def render(data):
-    validate(data)
+def render_legacy(data):
+    validate_legacy(data)
     chip=lambda xs: ''.join(f'<a class="e-link" href="#e-{esc(x)}">{esc(x)} 证据</a>' for x in xs)
     heading=lambda id,title,desc: f'<section id="{id}"><div class="section-head"><h2>{esc(title)}</h2><p>{esc(desc)}</p></div>'
     dirs=data['directions'];ev=data['evidence']; parts=[]
@@ -111,6 +111,19 @@ def render(data):
     payload=json.dumps(data,ensure_ascii=False).replace('<','\\u003c').replace('\u2028','\\u2028').replace('\u2029','\\u2029')
     return template.replace('<title>研发罗盘</title>',f'<title>{esc(data["title"])}</title>').replace('<!-- REPORT_BODY -->',''.join(parts)).replace('__REPORT_DATA__',payload)
 
+def validate(data):
+    if data.get('schema_version') == 2:
+        from research_model import validate_v2
+        validate_v2(data)
+    else:
+        validate_legacy(data)
+
+def render(data):
+    if data.get('schema_version') == 2:
+        from research_model import render_v2
+        return render_v2(data, render_legacy)
+    return render_legacy(data)
+
 def write_report(data, output):
     result=render(data)
     output=Path(output);output.parent.mkdir(parents=True,exist_ok=True)
@@ -123,8 +136,26 @@ def write_report(data, output):
         if temporary is not None and temporary.exists():temporary.unlink()
 
 if __name__=='__main__':
-    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('data',type=Path);parser.add_argument('--output',required=True,type=Path);args=parser.parse_args()
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('data',type=Path,nargs='?')
+    targets=parser.add_mutually_exclusive_group(required=True)
+    targets.add_argument('--output',type=Path)
+    targets.add_argument('--bundle',type=Path,help='Write report, reading catalog, CSV, data and hash manifest together (schema 2).')
+    targets.add_argument('--check-bundle',type=Path,help='Check the generated manifest and every artifact hash.')
+    args=parser.parse_args()
     try:
-        write_report(json.loads(args.data.read_text(encoding='utf-8-sig')),args.output)
-        print('Report generated:',args.output)
+        if args.check_bundle:
+            from research_model import check_bundle
+            check_bundle(args.check_bundle)
+            print('Bundle integrity PASS (not semantic review)')
+        else:
+            if args.data is None: raise ValueError('An input data file is required')
+            data=json.loads(args.data.read_text(encoding='utf-8-sig'))
+            if args.bundle:
+                from research_model import write_bundle
+                write_bundle(data,args.bundle,render)
+                print('Bundle generated:',args.bundle)
+            else:
+                write_report(data,args.output)
+                print('Report generated:',args.output)
     except (ValueError,KeyError,TypeError,OSError) as error:parser.exit(1,'Report not generated: '+str(error)+'\n')

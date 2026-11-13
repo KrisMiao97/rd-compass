@@ -1,0 +1,162 @@
+{
+  "schema_version": 2,
+  "title": "过滤与维护路线｜合成演示",
+  "cutoff": "2026-11-13",
+  "finding": "滤面承担过滤，连接决定如何拆洗。所有资料、标识和日期均为合成演示。",
+  "opportunity": "可拆连接可能让维护接触到原先被遮挡的滤面；是否更易清洁尚未测量。",
+  "judgment": "把可拆连接作为维护方式的比较基准，不将其写成性能最优。",
+  "boundary": "本例只验证报告功能，不含真实专利或性能结论。",
+  "directions": [
+    {
+      "id": "D1",
+      "name": "让维护接触到滤面",
+      "benefit": "可能便于清理被遮挡的滤面",
+      "tradeoff": "增加定位与误装条件",
+      "judgment": "将可拆连接作为维护方式比较基准，收益尚未实测。",
+      "evidence_state": "合成结构披露；没有性能测量",
+      "decision_state": "探索",
+      "reasoning": [
+        {
+          "title": "滤框位于入口",
+          "text": "合成资料将滤框安装在流道入口。",
+          "evidence": [
+            "E1"
+          ]
+        },
+        {
+          "title": "连接控制拆卸方式",
+          "text": "固定连接与可拆卡扣执行相同定位任务。",
+          "evidence": [
+            "E1"
+          ]
+        },
+        {
+          "title": "取出后可接近滤面",
+          "text": "维护可达性可能增加，没有清洗效果测量。",
+          "evidence": [
+            "E1"
+          ]
+        },
+        {
+          "title": "需要留出取出空间",
+          "text": "空间不足时，可拆结构仍难以维护。",
+          "evidence": [
+            "E1"
+          ]
+        },
+        {
+          "title": "定位与耐久仍未知",
+          "text": "可拆连接若不能可靠定位，维护收益可能被抵消。",
+          "evidence": [
+            "E1"
+          ]
+        }
+      ],
+      "conditions": [
+        {
+          "if": "安装处有握持和取出空间",
+          "then": "可拆连接具备可比较的维护用途，实际效果未知。"
+        }
+      ],
+      "route_ids": [
+        "R1"
+      ],
+      "judgment_kind": "comparison_baseline",
+      "rationale": "本题关注维护可达性，两种连接具有明确结构差别。"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "E1",
+      "title": "合成过滤资料",
+      "summary": "入口滤框可采用固定连接或可拆卡扣，维护方式不同。",
+      "source_role": "合成资料",
+      "in_sample": true,
+      "location": "合成第1页",
+      "disclosure": "滤框位于流道入口；合成资料分别描述固定连接与维护时可解开的卡扣。",
+      "limitation": "尚无实测",
+      "documents": [
+        {
+          "number": "SYN-A",
+          "url": "https://example.org/synthetic",
+          "locations": [
+            {
+              "statement": "可拆连接允许取出滤框",
+              "locator": "清洗说明，合成第1节"
+            },
+            {
+              "statement": "卡扣须正确定位",
+              "locator": "装配排障，合成第2节"
+            }
+          ]
+        }
+      ],
+      "record_ids": [
+        "source1"
+      ],
+      "directions": [
+        "D1"
+      ]
+    }
+  ],
+  "data_version": "synthetic-2026-11-13-1",
+  "modes": [
+    "technology",
+    "opportunity"
+  ],
+  "current_landscape": "本例比较固定连接和可拆连接，不代表行业全貌。",
+  "background": [
+    {
+      "title": "过滤与清洗是不同任务",
+      "text": "滤面安装在流道入口，用于截留颗粒；连接方式影响维护时能否取出滤框。合成资料没有效果测量。",
+      "evidence": [
+        "E1"
+      ]
+    }
+  ],
+  "records": [
+    {
+      "id": "source1",
+      "document_id": "SYN-A",
+      "application_id": "SYN-APP",
+      "in_sample": true,
+      "reading": "complete",
+      "read_scope": "合成完整权项及相关实施段",
+      "review": "self_checked"
+    },
+    {
+      "id": "source2",
+      "document_id": "SYN-B",
+      "application_id": "SYN-APP",
+      "in_sample": true,
+      "reading": "screened",
+      "read_scope": "仅核对合成目录标识",
+      "review": "not_reviewed"
+    }
+  ],
+  "routes": [
+    {
+      "id": "R1",
+      "name": "滤框连接与拆洗",
+      "task": "定位滤面并允许清理",
+      "mechanism": "滤框装在流道入口。固定连接保持位置，可拆卡扣在维护时允许取出滤框。",
+      "development": "两种连接在本例中并列，没有证据表明后一种替代前一种。",
+      "limitations": "取出方便不等于过滤效果更好；卡扣耐久未知。",
+      "evidence": [
+        "E1"
+      ]
+    }
+  ],
+  "timeline": [
+    {
+      "date": "2020-01-01",
+      "date_type": "publication",
+      "document_id": "SYN-A",
+      "title": "合成公开事件",
+      "change": "描述固定连接和可拆连接，没有性能比较。",
+      "evidence": [
+        "E1"
+      ]
+    }
+  ]
+}
