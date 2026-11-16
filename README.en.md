@@ -6,7 +6,7 @@
 
 ## Real case | Do you need to open the lid to clean the kettle filter?
 
-**[Open the interactive report (Chinese)](https://rawcdn.githack.com/KrisMiao97/rd-compass/b98e532c4417757f80e1bcd86ad156ef80183ef6/docs/kettle/index.html)** · [Reproduce it with Codex](#install-and-try-a-first-prompt) · [GitHub text version](docs/kettle/README.md)
+**[Open the interactive report (Chinese)](https://htmlpreview.github.io/?https://github.com/KrisMiao97/rd-compass/blob/b98e532c4417757f80e1bcd86ad156ef80183ef6/docs/kettle/index.html)** · [Reproduce it with Codex](#install-and-try-a-first-prompt) · [GitHub text version](docs/kettle/README.md)
 
 - **Remove the filter at the spout.** In [US5672274A](https://patents.google.com/patent/US5672274A/en), the filter lifts out from the top of the spout while the mounting frame stays on the kettle body.
 - **Move the filter with the lid.** In [EP0676161A1](https://patents.google.com/patent/EP0676161A1/en), the lid supports the filter. Opening the lid moves the filter away from its engagement with the inner wall near the spout.

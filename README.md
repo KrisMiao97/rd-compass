@@ -6,7 +6,7 @@
 
 ## 真实案例｜清理水壶滤件，要先打开壶盖吗？
 
-**[在线打开互动报告](https://rawcdn.githack.com/KrisMiao97/rd-compass/b98e532c4417757f80e1bcd86ad156ef80183ef6/docs/kettle/index.html)** · [在 Codex 跑一遍](#安装并试问) · [GitHub 文字版](docs/kettle/README.md)
+**[在线打开互动报告](https://htmlpreview.github.io/?https://github.com/KrisMiao97/rd-compass/blob/b98e532c4417757f80e1bcd86ad156ef80183ef6/docs/kettle/index.html)** · [在 Codex 跑一遍](#安装并试问) · [GitHub 文字版](docs/kettle/README.md)
 
 - **从壶嘴取出**：[US5672274A](https://patents.google.com/patent/US5672274A/en) 的滤件可从壶嘴上方取出，连接框架留在壶体上。
 - **随壶盖移开**：[EP0676161A1](https://patents.google.com/patent/EP0676161A1/en) 中，壶盖支承滤件。打开壶盖时，滤件离开壶嘴内侧的接合位置。
