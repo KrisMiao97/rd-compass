@@ -6,7 +6,7 @@
 
 ## 真实案例｜清理水壶滤件，要先打开壶盖吗？
 
-**[直接打开水壶专利演示](docs/kettle/README.md)** · 浏览器内查看，无需下载或登录。
+**[在线打开互动报告](https://rawcdn.githack.com/KrisMiao97/rd-compass/b98e532c4417757f80e1bcd86ad156ef80183ef6/docs/kettle/index.html)** · [在 Codex 跑一遍](#安装并试问) · [GitHub 文字版](docs/kettle/README.md)
 
 - **从壶嘴取出**：[US5672274A](https://patents.google.com/patent/US5672274A/en) 的滤件可从壶嘴上方取出，连接框架留在壶体上。
 - **随壶盖移开**：[EP0676161A1](https://patents.google.com/patent/EP0676161A1/en) 中，壶盖支承滤件。打开壶盖时，滤件离开壶嘴内侧的接合位置。
@@ -15,13 +15,27 @@
 
 ## 安装并试问
 
-在终端运行以下命令，将研发罗盘安装到 Codex。命令需要 Node.js 22.20 或更高版本。
+在 Windows 上准备 Codex 和 Python 3.10 或更新版本。在一个新文件夹中打开 PowerShell，将 Skill 安装到当前项目。
 
-```sh
-npx skills add https://codeload.github.com/KrisMiao97/rd-compass/zip/refs/heads/main --skill rd-compass --agent codex --global --yes
+```powershell
+$rdPackage = Join-Path ([IO.Path]::GetTempPath()) ("rd-compass-" + [guid]::NewGuid())
+New-Item -ItemType Directory -Path $rdPackage | Out-Null
+Invoke-WebRequest 'https://codeload.github.com/KrisMiao97/rd-compass/zip/refs/heads/main' -UseBasicParsing -OutFile "$rdPackage/rd-compass.zip" -ErrorAction Stop
+Expand-Archive -LiteralPath "$rdPackage/rd-compass.zip" -DestinationPath "$rdPackage/source" -ErrorAction Stop
+New-Item -ItemType Directory -Force -Path '.agents/skills' | Out-Null
+Copy-Item -LiteralPath "$rdPackage/source/rd-compass-main/rd-compass" -Destination '.agents/skills/rd-compass' -Recurse -ErrorAction Stop
 ```
 
-在 Codex 新对话中粘贴第一条提问。示例提供两份公开专利链接。
+在 Codex 打开同一个文件夹，新建对话并发送下面这段任务。
+
+```text
+请使用当前项目安装的 $rd-compass，读取 .agents/skills/rd-compass/assets/kettle-case.json，复现「取出水壶滤件，需要先打开壶盖吗？」案例。使用案例包已有证据，保留两件专利的公开号和来源，说明不移动壶盖、允许开盖两种条件下怎样选路线。请用 Skill 自带的 Python 脚本生成报告包到 kettle-report，并检查报告包的完整性。完成后给出 kettle-report/report.html 的打开路径。
+```
+
+打开 `kettle-report/report.html` 查看结果。这次练习自带案例材料，无需专利数据库账号。在线演示与复现报告使用同一份案例数据，在线版采用较新的报告版式。
+
+<details>
+<summary>进阶练习：直接从两件公开专利做分析</summary>
 
 ```text
 请用 $rd-compass 比较下面两件专利的电水壶滤件方案。
@@ -31,6 +45,8 @@ https://patents.google.com/patent/EP0676161A1/en
 对比必须保持壶盖原位和允许开盖两种情形，说明各条路线适用的条件。
 给出对应权利要求和附图编号，并指出还缺哪些性能数据。
 ```
+
+</details>
 
 [在 WorkBuddy 使用](https://www.workbuddy.cn/share/asset?shareCode=esemC6pAN0SejrTocd72G5&sig=wvpo9epwGbdBVx04)
 

@@ -6,7 +6,7 @@
 
 ## Real case | Do you need to open the lid to clean the kettle filter?
 
-**[Open the kettle patent demo](docs/kettle/README.md)** · Chinese-language walkthrough with expandable evidence, no download or sign-in required.
+**[Open the interactive report (Chinese)](https://rawcdn.githack.com/KrisMiao97/rd-compass/b98e532c4417757f80e1bcd86ad156ef80183ef6/docs/kettle/index.html)** · [Reproduce it with Codex](#install-and-try-a-first-prompt) · [GitHub text version](docs/kettle/README.md)
 
 - **Remove the filter at the spout.** In [US5672274A](https://patents.google.com/patent/US5672274A/en), the filter lifts out from the top of the spout while the mounting frame stays on the kettle body.
 - **Move the filter with the lid.** In [EP0676161A1](https://patents.google.com/patent/EP0676161A1/en), the lid supports the filter. Opening the lid moves the filter away from its engagement with the inner wall near the spout.
@@ -15,13 +15,14 @@ The demo compares maintenance steps and points to relevant claims and figures in
 
 ## Install and try a first prompt
 
-Run this command in a terminal to install the skill for Codex. You need Node.js 22.20 or later.
+Follow the [Windows PowerShell installation steps](README.md#安装并试问) in an empty project folder. Open the same folder in Codex and send this prompt. The case data comes with the skill, so you can reproduce the report without a patent database account.
 
-```sh
-npx skills add https://codeload.github.com/KrisMiao97/rd-compass/zip/refs/heads/main --skill rd-compass --agent codex --global --yes
+```text
+Use the project's $rd-compass skill to reproduce the kettle filter case from .agents/skills/rd-compass/assets/kettle-case.json. Keep both patent numbers and source links. Compare the routes when the lid must stay in place and when it can be opened. Run the skill's Python report generator, save the bundle to kettle-report, check its integrity, and give me the path to kettle-report/report.html.
 ```
 
-Paste this prompt into a new Codex chat.
+<details>
+<summary>Research exercise using the two patent publications</summary>
 
 ```text
 Use $rd-compass to compare the electric-kettle filters in these two patents.
@@ -32,6 +33,8 @@ and how to remove it for cleaning. Compare cases where the lid must stay
 in place and where it can be opened. Cite the relevant claims and figures,
 and identify what performance measurements are still needed.
 ```
+
+</details>
 
 [Use the skill in WorkBuddy](https://www.workbuddy.cn/share/asset?shareCode=esemC6pAN0SejrTocd72G5&sig=wvpo9epwGbdBVx04)
 
