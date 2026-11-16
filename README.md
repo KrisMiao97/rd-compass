@@ -4,7 +4,35 @@
 
 **解释产品为什么需要某种技术、各条路线怎样工作和发展，并据此发现有条件的研发机会。** 可按任务切换到路线比较与立项准备。
 
-[下载离线互动演示](docs/rd-compass-synthetic-demo.zip?raw=1) · [查看新版合成输入](rd-compass/assets/report-data.v2.example.json)
+## 真实案例｜清理水壶滤件，要先打开壶盖吗？
+
+**[直接打开水壶专利演示](docs/kettle/README.md)** · 浏览器内查看，无需下载或登录。
+
+- **从壶嘴取出**：[US5672274A](https://patents.google.com/patent/US5672274A/en) 的滤件可从壶嘴上方取出，连接框架留在壶体上。
+- **随壶盖移开**：[EP0676161A1](https://patents.google.com/patent/EP0676161A1/en) 中，壶盖支承滤件。打开壶盖时，滤件离开壶嘴内侧的接合位置。
+
+演示比较两种路线的维护动作，并标出相关权利要求和附图。案例范围限于这两件公开专利的相关内容，清洗效果和寿命仍需实测。
+
+## 安装并试问
+
+在终端运行以下命令，将研发罗盘安装到 Codex。命令需要 Node.js 和 Git。
+
+```sh
+npx skills add KrisMiao97/rd-compass --skill rd-compass --agent codex --global --yes
+```
+
+在 Codex 新对话中粘贴第一条提问。示例提供两份公开专利链接。
+
+```text
+请用 $rd-compass 比较下面两件专利的电水壶滤件方案。
+https://patents.google.com/patent/US5672274A/en
+https://patents.google.com/patent/EP0676161A1/en
+分别说明滤件装在哪里、倒水时水怎么经过滤网、清理时怎么取出。
+对比必须保持壶盖原位和允许开盖两种情形，说明各条路线适用的条件。
+给出对应权利要求和附图编号，并指出还缺哪些性能数据。
+```
+
+[在 WorkBuddy 使用](https://www.workbuddy.cn/share/asset?shareCode=esemC6pAN0SejrTocd72G5&sig=wvpo9epwGbdBVx04)
 
 ## 三种研究目的
 
@@ -17,6 +45,8 @@
 模式可以组合。现有技术路线与未来研发方向分别组织，不把每类专利自动变成一个机会，不默认写成试验任务书。研究优先、比较基准和性能优越使用不同依据。
 
 ## 无需账号的新版演示
+
+[下载离线互动演示](docs/rd-compass-synthetic-demo.zip?raw=1) · [查看新版合成输入](rd-compass/assets/report-data.v2.example.json)
 
 [![过滤与维护合成演示：产品背景、现有路线、候选方向和可回查证据。](docs/preview.png)](docs/rd-compass-synthetic-demo.zip?raw=1)
 

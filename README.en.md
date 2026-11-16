@@ -4,7 +4,36 @@
 
 **Explain why a product needs a technology, how existing approaches work and evolve, and which product changes are worth investigating.** Choose a report structure that fits the research question.
 
-[Download the offline demo](docs/rd-compass-synthetic-demo.zip?raw=1) · [View the new synthetic input](rd-compass/assets/report-data.v2.example.json)
+## Real case | Do you need to open the lid to clean the kettle filter?
+
+**[Open the kettle patent demo](docs/kettle/README.md)** · Chinese-language walkthrough with expandable evidence, no download or sign-in required.
+
+- **Remove the filter at the spout.** In [US5672274A](https://patents.google.com/patent/US5672274A/en), the filter lifts out from the top of the spout while the mounting frame stays on the kettle body.
+- **Move the filter with the lid.** In [EP0676161A1](https://patents.google.com/patent/EP0676161A1/en), the lid supports the filter. Opening the lid moves the filter away from its engagement with the inner wall near the spout.
+
+The demo compares maintenance steps and points to relevant claims and figures in the two published documents. Cleaning performance and service life would require measurements.
+
+## Install and try a first prompt
+
+Run this command in a terminal to install the skill for Codex. You need Node.js and Git.
+
+```sh
+npx skills add KrisMiao97/rd-compass --skill rd-compass --agent codex --global --yes
+```
+
+Paste this prompt into a new Codex chat.
+
+```text
+Use $rd-compass to compare the electric-kettle filters in these two patents.
+https://patents.google.com/patent/US5672274A/en
+https://patents.google.com/patent/EP0676161A1/en
+Explain where each filter sits, how water flows through it while pouring,
+and how to remove it for cleaning. Compare cases where the lid must stay
+in place and where it can be opened. Cite the relevant claims and figures,
+and identify what performance measurements are still needed.
+```
+
+[Use the skill in WorkBuddy](https://www.workbuddy.cn/share/asset?shareCode=esemC6pAN0SejrTocd72G5&sig=wvpo9epwGbdBVx04)
 
 ## Three research purposes
 
@@ -17,6 +46,8 @@
 Modes can be combined. Existing approaches and future opportunities are distinct, linked concepts. Research priority and a comparison baseline do not mean superior measured performance. A technical explanation does not automatically become a test assignment.
 
 ## A fictional demo
+
+[Download the offline demo](docs/rd-compass-synthetic-demo.zip?raw=1) · [View the new synthetic input](rd-compass/assets/report-data.v2.example.json)
 
 [![A synthetic filter-maintenance report with context, approaches, opportunities and evidence.](docs/preview.png)](docs/rd-compass-synthetic-demo.zip?raw=1)
 
