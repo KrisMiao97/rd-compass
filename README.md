@@ -15,7 +15,7 @@
 
 ## 安装并试问
 
-在终端运行以下命令，将研发罗盘安装到 Codex。命令需要 Node.js 和 Git。
+在终端运行以下命令，将研发罗盘安装到 Codex。命令需要 Node.js 22.20 或更高版本，以及 Git。
 
 ```sh
 npx skills add KrisMiao97/rd-compass --skill rd-compass --agent codex --global --yes

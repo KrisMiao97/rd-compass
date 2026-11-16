@@ -15,7 +15,7 @@ The demo compares maintenance steps and points to relevant claims and figures in
 
 ## Install and try a first prompt
 
-Run this command in a terminal to install the skill for Codex. You need Node.js and Git.
+Run this command in a terminal to install the skill for Codex. You need Node.js 22.20 or later, and Git.
 
 ```sh
 npx skills add KrisMiao97/rd-compass --skill rd-compass --agent codex --global --yes
