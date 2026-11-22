@@ -1,6 +1,6 @@
 # R&D Compass · 研发罗盘
 
-[GitHub skill package v0.7.4](https://github.com/KrisMiao97/rd-compass/releases/tag/v0.7.4) · The WorkBuddy share uses a separate release channel.
+[GitHub skill package v0.7.4](https://raw.githubusercontent.com/KrisMiao97/rd-compass/429ca91577437068d9386ec32c398f1a5ae3ec08/downloads/rd-compass-v0.7.4.zip) · The WorkBuddy share uses a separate release channel.
 
 [简体中文](README.md) · English · **v0.7.4**
 

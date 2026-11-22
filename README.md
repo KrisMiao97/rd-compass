@@ -1,6 +1,6 @@
 # 研发罗盘 · R&D Compass
 
-[GitHub 通用安装包 v0.7.4](https://github.com/KrisMiao97/rd-compass/releases/tag/v0.7.4) · WorkBuddy 分享页为独立更新渠道。
+[GitHub 通用安装包 v0.7.4](https://raw.githubusercontent.com/KrisMiao97/rd-compass/429ca91577437068d9386ec32c398f1a5ae3ec08/downloads/rd-compass-v0.7.4.zip) · WorkBuddy 分享页为独立更新渠道。
 
 简体中文 · [English](README.en.md) · **v0.7.4**
 
