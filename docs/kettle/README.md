@@ -35,3 +35,5 @@
 [查看完整 HTML 报告文件](index.html) · 在文件页点击下载，保存后用浏览器打开，可查看技术时间图、路线和证据定位。
 
 [返回首页，安装并试问](../../README.md#安装并试问)
+
+**[看两种滤件怎么取出来 · 专利产品三维图解](https://krismiao97.github.io/patent-review-kit/kettle-filters.html)**　转动模型，切换到“取出时”，观察固定框架、壶盖和滤件各自的位置。

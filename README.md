@@ -13,6 +13,17 @@
 
 演示比较两种路线的维护动作，并标出相关权利要求和附图。案例范围限于这两件公开专利的相关内容，清洗效果和寿命仍需实测。
 
+**[看两种滤件怎么取出来 · 专利产品三维图解](https://krismiao97.github.io/patent-review-kit/kettle-filters.html)**　转动模型，切换到“取出时”，观察固定框架、壶盖和滤件各自的位置。
+
+<details>
+<summary>想扩查其他申请人采用的滤件结构？</summary>
+
+已给的两篇公开文本足以复现本例。扩展到其他申请人或境外同族时，可提供更多公报，也可使用已有的授权检索来源。需要申请智慧芽 MCP 权限时，可从下方表单申请积分。已有权限可直接查看配置教程，按提示添加服务地址和 MCP Key，再检查客户端能否列出专利工具。
+
+[申请智慧芽 MCP 积分（推广链接）](https://app-u.jingsocial.com/surl/dcbC6k7e) · [智慧芽 MCP 官方配置教程](https://open.zhihuiya.com/devportal/guides/mcp-installation)
+
+</details>
+
 ## 安装并试问
 
 在 Windows 上准备 Codex 和 Python 3.10 或更新版本。在一个新文件夹中打开 PowerShell，将 Skill 安装到当前项目。
