@@ -1,0 +1,413 @@
+{
+  "schema_version": 2,
+  "title": "机会、情境与补证｜合成回归演示",
+  "cutoff": "2026-11-13",
+  "finding": "滤面承担过滤，连接决定如何拆洗。所有资料、标识和日期均为合成演示。",
+  "opportunity": "可拆连接可能让维护接触到原先被遮挡的滤面；是否更易清洁尚未测量。",
+  "judgment": "把可拆连接作为维护方式的比较基准，不将其写成性能最优。",
+  "boundary": "本例只验证报告功能，不含真实专利或性能结论。",
+  "directions": [
+    {
+      "id": "D1",
+      "name": "让维护接触到滤面",
+      "benefit": "可能便于清理被遮挡的滤面",
+      "tradeoff": "增加定位与误装条件",
+      "judgment": "将可拆连接作为维护方式比较基准，收益尚未实测。",
+      "evidence_state": "合成结构披露；没有性能测量",
+      "decision_state": "探索",
+      "reasoning": [
+        {
+          "title": "滤框位于入口",
+          "text": "合成资料将滤框安装在流道入口。",
+          "evidence": [
+            "E1"
+          ]
+        },
+        {
+          "title": "连接控制拆卸方式",
+          "text": "固定连接与可拆卡扣执行相同定位任务。",
+          "evidence": [
+            "E1"
+          ]
+        },
+        {
+          "title": "取出后可接近滤面",
+          "text": "维护可达性可能增加，没有清洗效果测量。",
+          "evidence": [
+            "E1"
+          ]
+        },
+        {
+          "title": "需要留出取出空间",
+          "text": "空间不足时，可拆结构仍难以维护。",
+          "evidence": [
+            "E1"
+          ]
+        },
+        {
+          "title": "定位与耐久仍未知",
+          "text": "可拆连接若不能可靠定位，维护收益可能被抵消。",
+          "evidence": [
+            "E1"
+          ]
+        }
+      ],
+      "conditions": [
+        {
+          "if": "安装处有握持和取出空间",
+          "then": "可拆连接具备可比较的维护用途，实际效果未知。"
+        }
+      ],
+      "route_ids": [
+        "R1"
+      ],
+      "judgment_kind": "comparison_baseline",
+      "rationale": "本题关注维护可达性，两种连接具有明确结构差别。"
+    },
+    {
+      "id": "D2",
+      "name": "保留固定连接",
+      "benefit": "可能便于清理被遮挡的滤面",
+      "tradeoff": "增加定位与误装条件",
+      "judgment": "作为简单基准，维护效果尚未实测。",
+      "evidence_state": "合成结构披露；没有性能测量",
+      "decision_state": "探索",
+      "reasoning": [
+        {
+          "title": "滤框位于入口",
+          "text": "合成资料将滤框安装在流道入口。",
+          "evidence": [
+            "E1"
+          ]
+        },
+        {
+          "title": "连接控制拆卸方式",
+          "text": "固定连接与可拆卡扣执行相同定位任务。",
+          "evidence": [
+            "E1"
+          ]
+        },
+        {
+          "title": "取出后可接近滤面",
+          "text": "维护可达性可能增加，没有清洗效果测量。",
+          "evidence": [
+            "E1"
+          ]
+        },
+        {
+          "title": "需要留出取出空间",
+          "text": "空间不足时，可拆结构仍难以维护。",
+          "evidence": [
+            "E1"
+          ]
+        },
+        {
+          "title": "定位与耐久仍未知",
+          "text": "可拆连接若不能可靠定位，维护收益可能被抵消。",
+          "evidence": [
+            "E1"
+          ]
+        }
+      ],
+      "conditions": [
+        {
+          "if": "安装处有握持和取出空间",
+          "then": "可拆连接具备可比较的维护用途，实际效果未知。"
+        }
+      ],
+      "route_ids": [
+        "R1"
+      ],
+      "judgment_kind": "comparison_baseline",
+      "rationale": "本题关注维护可达性，两种连接具有明确结构差别。"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "E1",
+      "title": "合成过滤资料",
+      "summary": "入口滤框可采用固定连接或可拆卡扣，维护方式不同。",
+      "source_role": "合成资料",
+      "in_sample": true,
+      "location": "合成第1页",
+      "disclosure": "滤框位于流道入口；合成资料分别描述固定连接与维护时可解开的卡扣。",
+      "limitation": "尚无实测",
+      "documents": [
+        {
+          "number": "SYN-A",
+          "url": "https://example.org/synthetic",
+          "locations": [
+            {
+              "statement": "可拆连接允许取出滤框",
+              "locator": "清洗说明，合成第1节"
+            },
+            {
+              "statement": "卡扣须正确定位",
+              "locator": "装配排障，合成第2节"
+            }
+          ]
+        }
+      ],
+      "record_ids": [
+        "source1"
+      ],
+      "directions": [
+        "D1",
+        "D2"
+      ]
+    }
+  ],
+  "data_version": "synthetic-methods-0.5.0",
+  "modes": [
+    "opportunity"
+  ],
+  "current_landscape": "本例比较固定连接和可拆连接，不代表行业全貌。",
+  "background": [
+    {
+      "title": "过滤与清洗是不同任务",
+      "text": "滤面安装在流道入口，用于截留颗粒；连接方式影响维护时能否取出滤框。合成资料没有效果测量。",
+      "evidence": [
+        "E1"
+      ]
+    }
+  ],
+  "records": [
+    {
+      "id": "source1",
+      "document_id": "SYN-A",
+      "application_id": "SYN-APP",
+      "in_sample": true,
+      "reading": "complete",
+      "read_scope": "合成完整权项及相关实施段",
+      "review": "self_checked"
+    },
+    {
+      "id": "source2",
+      "document_id": "SYN-B",
+      "application_id": "SYN-APP",
+      "in_sample": true,
+      "reading": "screened",
+      "read_scope": "仅核对合成目录标识",
+      "review": "not_reviewed"
+    }
+  ],
+  "routes": [
+    {
+      "id": "R1",
+      "name": "滤框连接与拆洗",
+      "task": "定位滤面并允许清理",
+      "mechanism": "滤框装在流道入口。固定连接保持位置，可拆卡扣在维护时允许取出滤框。",
+      "development": "两种连接在本例中并列，没有证据表明后一种替代前一种。",
+      "limitations": "取出方便不等于过滤效果更好；卡扣耐久未知。",
+      "evidence": [
+        "E1"
+      ]
+    }
+  ],
+  "timeline": [
+    {
+      "date": "2020-01-01",
+      "date_type": "publication",
+      "document_id": "SYN-A",
+      "title": "合成公开事件",
+      "change": "描述固定连接和可拆连接，没有性能比较。",
+      "evidence": [
+        "E1"
+      ]
+    }
+  ],
+  "method_support": {
+    "version": 1,
+    "opportunities": [
+      {
+        "id": "O1",
+        "name": "让维护接触到滤面",
+        "need": "假设用户希望清理入口滤面，需求未经调查。",
+        "need_state": "hypothesis",
+        "capability": "使滤面在维护时可达。",
+        "mechanism": "连接方式改变滤面能否被取出，过滤原理不因此改变。",
+        "prerequisites": "需要留出取出空间并能重新定位。",
+        "next_condition": "核实维护任务后再决定是否研究连接耐久。",
+        "direction_ids": [
+          "D1",
+          "D2"
+        ],
+        "route_ids": [
+          "R1"
+        ],
+        "evidence": [
+          "E1"
+        ],
+        "need_evidence": []
+      }
+    ],
+    "comparison": {
+      "scope": "两个合成方向在相同维护任务下比较；不代表行业路线全貌。",
+      "baseline": "D2 固定连接为简单结构基准。",
+      "depth": "有限情境的定性分析，无仿真和实测",
+      "direction_ids": [
+        "D1",
+        "D2"
+      ],
+      "criteria": [
+        {
+          "id": "C1",
+          "name": "维护动作可行",
+          "requirement": "结构应允许场景中的维护动作。",
+          "kind": "mandatory",
+          "basis": "合成研究任务给出的结构比较标准。",
+          "evidence": []
+        }
+      ],
+      "uncertainties": [
+        {
+          "id": "U1",
+          "name": "取出空间",
+          "range": "有空间或空间受限，具体尺寸未知。",
+          "basis": "合成工程假设。",
+          "evidence": []
+        }
+      ],
+      "scenarios": [
+        {
+          "id": "S1",
+          "name": "有取出空间",
+          "conditions": "滤框附近有握持与取出的空间。",
+          "why_plausible": "为了检查可拆结构的前提而设定。",
+          "judgment": "D1 具备结构上的取出条件，实际清洁收益仍未知。",
+          "uncertainty_ids": [
+            "U1"
+          ]
+        },
+        {
+          "id": "S2",
+          "name": "取出空间受限",
+          "conditions": "滤框周边无法完成取出动作。",
+          "why_plausible": "用于检查空间约束的反例。",
+          "judgment": "D1 不能直接实现取出维护；应重新研究布局或保留其他维护方式。",
+          "uncertainty_ids": [
+            "U1"
+          ]
+        }
+      ],
+      "cells": [
+        {
+          "direction_id": "D1",
+          "scenario_id": "S1",
+          "criterion_id": "C1",
+          "status": "meets",
+          "basis_type": "inference",
+          "reason": "合成假设下的结构取出条件成立。",
+          "evidence": [
+            "E1"
+          ]
+        },
+        {
+          "direction_id": "D1",
+          "scenario_id": "S2",
+          "criterion_id": "C1",
+          "status": "unknown",
+          "basis_type": "unknown",
+          "reason": "合成材料不足以确定维护结果。",
+          "evidence": []
+        },
+        {
+          "direction_id": "D2",
+          "scenario_id": "S1",
+          "criterion_id": "C1",
+          "status": "unknown",
+          "basis_type": "unknown",
+          "reason": "合成材料不足以确定维护结果。",
+          "evidence": []
+        },
+        {
+          "direction_id": "D2",
+          "scenario_id": "S2",
+          "criterion_id": "C1",
+          "status": "unknown",
+          "basis_type": "unknown",
+          "reason": "合成材料不足以确定维护结果。",
+          "evidence": []
+        }
+      ],
+      "vulnerabilities": [
+        {
+          "direction_ids": [
+            "D1"
+          ],
+          "scenario_ids": [
+            "S2"
+          ],
+          "conditions": "空间受限且维护依赖取出滤框。",
+          "reason": "动作路径不足。",
+          "adaptation": "研究侧向取出或调整安装位置，此处只是设想。",
+          "switch_signal": "确认目标安装位置无法完成取出动作时重新考虑路线。",
+          "evidence": [
+            "E1"
+          ]
+        }
+      ]
+    },
+    "evidence_actions": [
+      {
+        "id": "A1",
+        "question": "目标使用场景是否有取出空间？",
+        "decision": "是否继续把可拆连接作为维护候选。",
+        "known": "合成资料给出了连接形式，没有目标产品尺寸。",
+        "approach": "优先复用已有尺寸和维护记录。",
+        "priority_reason": "这个答案决定维护动作是否可行；先看已有记录无需新增样机。",
+        "resources": "需要已有图纸或记录，取得成本未知。",
+        "timing": "取得记录后再收窄空间判断。",
+        "stop_rule": "记录能够确认动作路径，或确认无法从记录回答后结束本项回查。",
+        "inconclusive": "保留两个情境，不宣称选型完成。",
+        "kind": "records",
+        "status": "proposed",
+        "direction_ids": [
+          "D1",
+          "D2"
+        ],
+        "opportunity_ids": [
+          "O1"
+        ],
+        "scenario_ids": [
+          "S1",
+          "S2"
+        ],
+        "criterion_ids": [
+          "C1"
+        ],
+        "evidence": [
+          "E1"
+        ],
+        "outcomes": [
+          {
+            "id": "B1",
+            "result": "存在足够空间。",
+            "decision_change": "继续研究可拆方向，下一步问题仍为复位可靠性。"
+          },
+          {
+            "id": "B2",
+            "result": "无法留出动作空间。",
+            "decision_change": "修改布局或保留固定连接，不直接推进当前快拆结构。"
+          }
+        ],
+        "access": "external",
+        "current_judgment": "合成示例：保留两条条件路线。",
+        "remaining_reason": "合成示例：目标产品的实际使用记录未提供。"
+      }
+    ],
+    "method_notes": [
+      {
+        "method": "ifm",
+        "trigger": "需要把结构差异转成可能用途。",
+        "inputs": "合成结构资料与明确标记的用途假设。",
+        "work": "连接使用任务、产品能力、技术与前提。",
+        "result": "形成 O1，关联 D1 和 D2。",
+        "limits": "需求与清洁效果未验证。",
+        "evidence": [
+          "E1"
+        ]
+      }
+    ]
+  }
+}

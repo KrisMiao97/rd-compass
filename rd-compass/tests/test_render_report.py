@@ -35,6 +35,46 @@ class ReportTests(unittest.TestCase):
     def test_duplicate_ids_rejected(self):
         data=fixture();data['evidence'].append(copy.deepcopy(data['evidence'][0]))
         with self.assertRaises(ValueError):render(data)
+
+    def test_evidence_ids_keep_exact_values_and_safe_anchors(self):
+        data = fixture()
+        data['evidence'][0]['id'] = 'E02'
+        other = copy.deepcopy(data['evidence'][0])
+        other['id'] = 'E2'
+        special = copy.deepcopy(other)
+        special['id'] = '证据 A/1#"'
+        data['evidence'].extend([other, special])
+        for step in data['directions'][0]['reasoning']:
+            step['evidence'] = ['E02', 'E2', special['id']]
+        output = render(data)
+        self.assertIn('id="e-E02"', output)
+        self.assertIn('href="#e-E02"', output)
+        self.assertIn('id="e-E2"', output)
+        anchor = '~' + special['id'].encode('utf-8').hex()
+        self.assertIn('id="e-' + anchor + '"', output)
+        self.assertIn('href="#e-' + anchor + '"', output)
+        self.assertIn('证据 A/1#&quot;', output)
+        payload = re.search(r'<script id="report-data" type="application/json">(.*?)</script>', output, re.S)[1]
+        self.assertEqual([e['id'] for e in json.loads(payload)['evidence']], ['E02', 'E2', special['id']])
+
+    def test_evidence_ids_reject_duplicate_and_empty(self):
+        for identifier in ['', ' ', 'E02']:
+            data = fixture()
+            data['evidence'][0]['id'] = 'E02'
+            other = copy.deepcopy(data['evidence'][0])
+            other['id'] = identifier
+            data['evidence'].append(other)
+            for step in data['directions'][0]['reasoning']:
+                step['evidence'] = ['E02']
+            with self.subTest(identifier=identifier), self.assertRaises(ValueError):
+                render(data)
+
+    def test_direction_ids_still_require_original_number_format(self):
+        data = fixture()
+        data['directions'][0]['id'] = 'D01'
+        with self.assertRaises(ValueError):
+            render(data)
+
     def test_unresolved_evidence_rejected(self):
         data=fixture();data['directions'][0]['reasoning'][0]['evidence']=['E99']
         with self.assertRaises(ValueError):render(data)

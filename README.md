@@ -1,6 +1,8 @@
 # 研发罗盘 · R&D Compass
 
-简体中文 · [English](README.en.md) · **v0.4.0**
+[GitHub 通用安装包 v0.7.4](https://github.com/KrisMiao97/rd-compass/releases/tag/v0.7.4) · WorkBuddy 分享页为独立更新渠道。
+
+简体中文 · [English](README.en.md) · **v0.7.4**
 
 **解释产品为什么需要某种技术、各条路线怎样工作和发展，并据此发现有条件的研发机会。** 可按任务切换到路线比较与立项准备。
 

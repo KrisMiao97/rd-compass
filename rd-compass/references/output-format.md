@@ -1,6 +1,8 @@
-# 输出数据与同源交付（schema 2）
+# 输出数据与同源交付
 
-新研究采用 schema_version: 2。兼容旧 schema 1，旧格式见 [旧约定](output-format-v1.md)；旧示例和历史报告继续可运行，但不自动获得新增的日期、台账或语义验收。新增字段必须按实际来源填写，禁止猜造。schema 2 可只解释技术，不强制生成未来方向。
+本轮入口与交付统一遵守 [市场确认、角色阅读和完整性](reader-research-contract.md)。新兴技术、发展阶段、技术空白和跨领域匹配按 [技术变化与机会研判](technology-opportunities.md) 按需启用。市场搜索未经使用者确认时不开展，保留相关判断未知；旧版既有研究记录继续复用。
+
+未来技术趋势与研发储备报告另见[预研数据与生成约定](foresight-format.md)。常规新研究采用 `schema_version: 3`，保留 schema 2 的研究数据和台账。旧 schema 1/2 仍可打开及复现，旧格式见 [旧约定](output-format-v1.md)。重新生成旧 schema 2 时，原来的自由文字摘要标为历史摘要。新增字段按实际来源填写。纯技术说明可以省略 `recommendations`，也可以明确留空。
 
 ## 命令
 
@@ -19,14 +21,15 @@ python -m unittest discover -s tests -v
 
 | 字段 | 约定 |
 |---|---|
-| schema_version | 2 |
+| schema_version | 新研究填 3。旧报告和旧示例继续使用原 schema |
 | data_version | 本次冻结输入的版本字符串；不能代替资料截止日 |
 | modes | technology、opportunity、decision 的非空数组，可组合 |
 | title / cutoff / finding / boundary | 题名、YYYY-MM-DD 资料截止日、已有发现、影响结论的边界 |
 | background | title/text/evidence 数组；technology 模式必填，可如实说明背景未知 |
 | current_landscape | 当前已查范围内的技术格局；technology 必填 |
 | decision_context | decision 必填；写目标、限制、偏好及关键未知，不能默认项目目标 |
-| opportunity / judgment | 可选的产品机会和条件判断，纯技术理解不强填机会 |
+| recommendations | 机会与决策模式必填数组，无合格首屏建议时填 `[]`。技术模式作首屏建议时也使用该数组。`finding` 只写已支持的发现，共同未知写入 `boundary` |
+| opportunity / judgment | 仅旧版顶层摘要字段，schema 3 不接受。每条方向自身的 `judgment` 仍保留，首屏引用方向名称和该判断。 |
 | records / routes / directions / evidence | 四个数组，可为空，按本次研究范围填写 |
 | timeline | 可选事件数组；没有历史材料不强造时间线 |
 | plan / plan_requested | 可选 title/text 数组；decision 或明确 plan_requested:true 才展示计划。该布尔值须来自真实任务要求，不能为通过检查自设授权 |
@@ -51,6 +54,19 @@ direction 沿用 name/benefit/tradeoff/judgment/evidence_state/decision_state、
 
 judgment_kind 为 conditional_candidate、research_priority、comparison_baseline、performance_comparison。前三类不强求实测；性能比较还需 comparison_conditions 和 comparison_evidence。程序只检查字段与引用，证据是否可比及结论强度必须内容复核。非决策模式不展示候选的决策阶段，但保留原数据。
 
+## 首屏研发建议 recommendations
+
+| 字段 | 约定 |
+|---|---|
+| direction_id | 已有 `directions` 中的一个 ID，同方向只出现一次 |
+| evidence | 至少一个支持本方向的证据 ID。对应证据要有同件同版本的文献号、原文链接和权项、页段或附图等实际位置，且引用于本方向五步推导的第一步材料披露或对应机制路线。仅在对照、使用条件或筛选标签出现的条目不能作为本方向的原文依据 |
+| conditions | 对方向与对照同时适用的任务、配置、工况和边界 |
+| comparator | `name` 为可实施的具体基线，`mechanism` 说明在共同工况的工作方式。`basis_type: disclosure` 须配至少一条有原文的 `evidence`。`basis_type: engineering_baseline` 表示待验证的工程对照，明确其设定，可补来源 |
+| check | 在共同工况下比较的具体指标、现象或动作，说明如何判断是否有实质差异 |
+| elimination | `trigger` 写能观测到的失败结果或不满足的硬约束，`action` 写触发后停止该方向、缩小适用范围或切换方案 |
+
+首屏的链接进入同一个方向条目；条目直接显示这组工况、对照和淘汰条件，证据链接打开原文定位。编辑时检查原文是否真的支撑该机构、双方是否使用同一工况、淘汰条件能否改变取舍。没有实测时明确工程待验边界，不编造阈值或试验结果。仍不满足三个条件的想法可在正文标为线索。
+
 ## 证据 evidence
 
 沿用 E 编号、title、summary、source_role、in_sample、location、disclosure、limitation、directions、documents。record_ids 可关联零到多条实际记录；零条适用于未纳入逐件台账的背景资料，仍必须准确引用来源。卡片存在不等于文献已读完。
@@ -61,7 +77,7 @@ documents 每项为 number/url，可增加 locations:[{statement, locator}]，�
 
 ## 时间记录 timeline
 
-每项含 date（ISO日期或 null）、date_type（publication / grant / product_release / source_date / unknown）、document_id、title、change、evidence。已知日期相对升序，未知日期可保留；date_type 不由文献后缀自动生成。document_id 必须能对应所引证据的 documents.number 或关联 records.document_id。
+每项含 date（ISO日期或 null）、date_type（publication / grant / product_release / source_date / unknown）、document_id、title、change、evidence。新稿的 title 是简明技术标题，change 用一句话写能区分路线的要点，完整工作过程写在路线中。可选 route_ids 对应实际现有路线，供卡片直达；旧数据省略该字段仍可生成。已知日期相对升序，未知日期标明并放在已知节点之后；date_type 不由文献后缀自动生成。document_id 必须能对应所引证据的 documents.number 或关联 records.document_id。
 
 可选 earliest_verified_disclosure:true 仅适用于已知 publication 事件，还需 disclosure_locator 和 search_scope。表示本次已查范围内较早披露，不是行业首次。授权事件在较早公开未取得时仍可显示，不能借授权日声称技术起点。文献公开日、授权日、产品时间分别取证，继承/替代关系不是该字段推导结果。
 
@@ -70,3 +86,17 @@ documents 每项为 number/url，可增加 locations:[{statement, locator}]，�
 ## 内容与页面验证
 
 内容按 reader-review.md 审阅。结构检查、来源真实性、研究理解和浏览器交互是独立检查，分别记录。默认示例均为合成材料。合成测试成功不能称水壶真实报告已经重跑通过。
+
+## 0.5.0 可选方法关联
+
+method_support.version 为 1，包含 opportunities、comparison、evidence_actions、method_notes，字段和校验见 [方法关联数据](method-support-format.md)。模块按任务选择，旧 schema 2 可继续生成。程序检查机会/方向/情境/指标/证据引用、比较覆盖和实际结果状态；不能证明需求真实、证据可比或结论已在语义上同步。
+
+assets/report-data.methods.example.json 为完整合成回归数据。references/kettle-method-case.json 是两件真实专利的限定研究，阅读与评审边界见 case-review.md；它不是行业全景、需求调查、实验或法律结论。
+
+## 0.5.1 正文段落与交付回查
+
+方向可增加 narrative:[{text,evidence}]，由分析者按完整句子撰写并审核。正文须包含值得研究的能力、关键成立条件与代价，不能只剩营销摘要；reasoning 与 conditions 仍保留在数据及可展开依据中。未提供 narrative 的旧数据继续完整展示原推导，生成器不自动压缩或补造。
+
+method_support 可使用 research_check 及行动 access/current_judgment/remaining_reason/attempts，具体规则见 method-support-format.md。旧 schema 1/2 继续可读，不自动声明经过新版验收。
+
+证据 ID 直接沿用交接记录的非空字符串，在同一研究内精确区分并唯一。E02 与 E2 是两个不同 ID；所有引用使用原值，不按数字改写。报告对需要安全编码的 ID 仅转换页面锚点，研究数据与显示文本保留原值。重复 ID、未登记引用或无效 Unicode 会报错。

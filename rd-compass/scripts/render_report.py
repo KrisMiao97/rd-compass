@@ -8,6 +8,7 @@ import os
 import tempfile
 from datetime import date
 from urllib.parse import urlsplit
+from evidence_ids import evidence_anchor
 
 ROLES = ['材料披露', '方案差异', '可能能力', '成立条件', '尚存假设']
 def esc(value): return html.escape(str(value), quote=True)
@@ -15,6 +16,8 @@ def para(value): return '<p>'+esc(value)+'</p>'
 
 def validate_legacy(data):
     if not isinstance(data,dict) or data.get('schema_version')!=1: raise ValueError('schema_version must be 1')
+    if 'foresight' in data or data.get('report_contract_version') == 3:
+        raise ValueError('Future reports require schema_version 4')
     for key in ['title','cutoff','finding','opportunity','judgment','boundary']:
         if not isinstance(data.get(key),str) or not data[key].strip(): raise ValueError(f'Missing text: {key}')
     date.fromisoformat(data['cutoff'])
@@ -23,7 +26,11 @@ def validate_legacy(data):
     dirs=data['directions']; evidence=data['evidence']
     def ids(items,prefix):
         result=[x['id'] for x in items]
-        if len(set(result))!=len(result) or any(not re.fullmatch(prefix+r'[1-9]\d*',x) for x in result): raise ValueError('Duplicate or invalid '+prefix+' IDs')
+        if len(set(result))!=len(result): raise ValueError('Duplicate or invalid '+prefix+' IDs')
+        if prefix == 'E':
+            for value in result: evidence_anchor(value)
+        elif any(not re.fullmatch(prefix+r'[1-9]\d*',x) for x in result):
+            raise ValueError('Duplicate or invalid '+prefix+' IDs')
         return set(result)
     ds=ids(dirs,'D');es=ids(evidence,'E')
     def links(values):
@@ -62,7 +69,7 @@ def validate_legacy(data):
 
 def render_legacy(data):
     validate_legacy(data)
-    chip=lambda xs: ''.join(f'<a class="e-link" href="#e-{esc(x)}">{esc(x)} 证据</a>' for x in xs)
+    chip=lambda xs: ''.join(f'<a class="e-link" href="#e-{evidence_anchor(x)}">{esc(x)} 证据</a>' for x in xs)
     heading=lambda id,title,desc: f'<section id="{id}"><div class="section-head"><h2>{esc(title)}</h2><p>{esc(desc)}</p></div>'
     dirs=data['directions'];ev=data['evidence']; parts=[]
     nav=[('summary','研究结论'),('compare','方向比较'),('routes','结构与依据')]
@@ -97,7 +104,7 @@ def render_legacy(data):
     for e in ev:
         meta=e['source_role']+' · '+('计入主样本' if e['in_sample'] else '未计入主样本')
         docs=' · '.join(f'<a href="{esc(d["url"])}" rel="noopener">{esc(d["number"])}</a>' for d in e.get('documents',[]))
-        parts.append(f'<details class="evidence-item" id="e-{e["id"]}" data-routes="{esc(" ".join(e.get("directions",[])))}"><summary><strong>{e["id"]} {esc(e["title"])}</strong><span class="e-summary">{esc(e["summary"])}</span><span class="e-meta">{esc(meta)}</span></summary><div class="e-detail">{para(e.get("publication",""))}<p>{docs}</p><p><strong>原文位置：</strong>{esc(e["location"])}</p>{para(e["disclosure"])}<p><strong>判断边界：</strong>{esc(e["limitation"])}</p></div></details>')
+        parts.append(f'<details class="evidence-item" id="e-{evidence_anchor(e["id"])}" data-routes="{esc(" ".join(e.get("directions",[])))}"><summary><strong>{esc(e["id"])} {esc(e["title"])}</strong><span class="e-summary">{esc(e["summary"])}</span><span class="e-meta">{esc(meta)}</span></summary><div class="e-detail">{para(e.get("publication",""))}<p>{docs}</p><p><strong>原文位置：</strong>{esc(e["location"])}</p>{para(e["disclosure"])}<p><strong>判断边界：</strong>{esc(e["limitation"])}</p></div></details>')
     parts.append(f'</div><p class="empty" id="e-empty" {"hidden" if ev else ""}>没有匹配的证据，可更换关键词或重置筛选。</p></section>')
     parts.append(heading('next','已完成的补证与当前边界','先说明已经解决了什么，再说明哪份新资料会改变判断。'))
     parts.append('<ol class="worklog">'+''.join(f'<li><h3>{esc(n["question"])}</h3><p><strong>已完成：</strong>{esc(n["action"])}</p><p><strong>判断变化：</strong>{esc(n["finding"])}</p><p><strong>剩余未知：</strong>{esc(n["remaining"])}</p></li>' for n in data.get('worklog',[]))+'</ol>')
@@ -112,14 +119,18 @@ def render_legacy(data):
     return template.replace('<title>研发罗盘</title>',f'<title>{esc(data["title"])}</title>').replace('<!-- REPORT_BODY -->',''.join(parts)).replace('__REPORT_DATA__',payload)
 
 def validate(data):
-    if data.get('schema_version') == 2:
+    if data.get('schema_version') in (2, 3, 4):
         from research_model import validate_v2
         validate_v2(data)
     else:
         validate_legacy(data)
 
 def render(data):
-    if data.get('schema_version') == 2:
+    if data.get('schema_version') == 4:
+        from foresight_report import render_foresight
+        validate(data)
+        return render_foresight(data)
+    if data.get('schema_version') in (2, 3):
         from research_model import render_v2
         return render_v2(data, render_legacy)
     return render_legacy(data)
@@ -140,18 +151,30 @@ if __name__=='__main__':
     parser.add_argument('data',type=Path,nargs='?')
     targets=parser.add_mutually_exclusive_group(required=True)
     targets.add_argument('--output',type=Path)
-    targets.add_argument('--bundle',type=Path,help='Write report, reading catalog, CSV, data and hash manifest together (schema 2).')
+    targets.add_argument('--bundle',type=Path,help='Write report, reading catalog, CSV, data and hash manifest together (schemas 2–4).')
+    targets.add_argument('--foresight-template',type=Path,metavar='NEW_DIR',help='Export the approved interactive workbook and blank Markdown without study data.')
+    targets.add_argument('--diagnose-legacy',action='store_true',help='Diagnose old data without generating a ready report.')
     targets.add_argument('--check-bundle',type=Path,help='Check the generated manifest and every artifact hash.')
     args=parser.parse_args()
     try:
-        if args.check_bundle:
+        if args.foresight_template:
+            if args.data is not None: raise ValueError('The blank workbook takes no study data')
+            from foresight_report import export_template
+            export_template(args.foresight_template)
+            print('Workbook exported:',args.foresight_template)
+        elif args.check_bundle:
             from research_model import check_bundle
             check_bundle(args.check_bundle)
             print('Bundle integrity PASS (not semantic review)')
         else:
             if args.data is None: raise ValueError('An input data file is required')
             data=json.loads(args.data.read_text(encoding='utf-8-sig'))
-            if args.bundle:
+            if not isinstance(data, dict): raise ValueError('Research input must be a JSON object')
+            if args.diagnose_legacy:
+                if data.get('schema_version') not in (1,2,3): raise ValueError('Historical diagnosis is only for schemas 1–3')
+                validate(data)
+                print('Historical structure checked. No new report or readiness claim.')
+            elif args.bundle:
                 from research_model import write_bundle
                 write_bundle(data,args.bundle,render)
                 print('Bundle generated:',args.bundle)

@@ -1,0 +1,575 @@
+{
+  "schema_version": 4,
+  "report_contract_version": 3,
+  "data_version": "steam-oven-public-materials-2",
+  "title": "蒸汽烤箱的湿度估算：近期验证与中长期储备",
+  "cutoff": "2026-11-18",
+  "finding": "两件公开文本展示了不同的温度信号用法。能否把三处测温转为可靠的湿度估计，仍要在目标机型上对照。",
+  "boundary": "这是两件公开申请及一份参数手册的限定材料复现。资料不含行业检索全集、产品采用记录或样机试验。",
+  "modes": [
+    "technology",
+    "opportunity",
+    "foresight"
+  ],
+  "beginner_context": "蒸汽进入烹饪腔后会随气流移动。同一块壳体的温度、引出蒸汽的温度和腔内空气湿度是不同的量。",
+  "current_landscape": "在这批材料里，一种方案测引出蒸汽的温度，另一种从三处温度估算腔内湿度。目标用户是否需要额外湿度控制尚待确认。",
+  "background": [
+    {
+      "title": "先说明估算的物理量",
+      "text": "相对湿度把水蒸气分压与当前温度下的饱和蒸气压作比。含湿量则表示水蒸气质量与干空气质量之比。",
+      "evidence": [
+        "参数表"
+      ]
+    }
+  ],
+  "records": [
+    {
+      "id": "P1",
+      "document_id": "EP1975516A1",
+      "in_sample": true,
+      "reading": "targeted",
+      "read_scope": "复核扉页、图 4、[0029]、[0038]，按相关位置定点阅读。",
+      "review": "self_checked"
+    },
+    {
+      "id": "P2",
+      "document_id": "EP4579134A1",
+      "in_sample": true,
+      "reading": "targeted",
+      "read_scope": "定点核对扉页、权利要求 1、[0021]–[0023]，区分权项配置与具体计算示例。",
+      "review": "self_checked"
+    },
+    {
+      "id": "M1",
+      "document_id": "M211088EN-D",
+      "in_sample": false,
+      "reading": "targeted",
+      "read_scope": "定点核对参数定义与单位。",
+      "review": "self_checked"
+    }
+  ],
+  "routes": [
+    {
+      "id": "R1",
+      "name": "用引出蒸汽的温度反馈",
+      "task": "调节蒸汽注入。",
+      "mechanism": "在蒸汽烹饪模式，阀门关闭。当腔内压力高于环境压力或风机运行时，部分蒸汽从腔壁开口进入旁路腔，也就是引出少量蒸汽供测量的小腔。传感器测量引出蒸汽的温度，控制器可以据此调整蒸汽注入或注入温度。",
+      "development": "2008 年的公开申请给出了气路及测温位置。",
+      "limitations": "温度反馈可服务于蒸汽控制，不能直接当作湿度读数。",
+      "evidence": [
+        "E02"
+      ]
+    },
+    {
+      "id": "R2",
+      "name": "用壳体与腔内的温度估计湿度",
+      "task": "估算烹饪腔的空气湿度。",
+      "mechanism": "传感器同时读取壳体、壳体受冷却部件影响的区域和腔内循环空气的温度。控制器用这三处温度估算腔内湿度，再与控制器预设的湿度目标值比较。",
+      "development": "2025 年的公开申请给出了测点关系及经验表达。",
+      "limitations": "不同壳体热特性或风量是否需要重新标定，尚未验证。",
+      "evidence": [
+        "E2"
+      ]
+    }
+  ],
+  "directions": [
+    {
+      "id": "D1",
+      "name": "用已有温度信号估算湿度",
+      "benefit": "若误差可控，可以评估湿度信号对控制是否有帮助。",
+      "tradeoff": "需要更多测点、参照测量和标定。",
+      "judgment": "先验证能否稳定估算，再谈接入控制。",
+      "evidence_state": "有结构与估算关系的公开披露，缺少目标机型实测。",
+      "decision_state": "条件候选",
+      "judgment_kind": "conditional_candidate",
+      "rationale": "不同公开文本对温度信号的用法不同，值得用同一指标检验多测点的增量价值。",
+      "route_ids": [
+        "R2"
+      ],
+      "mechanism_kind": "algorithm",
+      "input": "三个位置在同一时刻的温度。",
+      "process": "按已标定关系把温度映射为腔内湿度估计。",
+      "output": "湿度估计与参考湿度的差值。",
+      "application_conditions": "传感器位置可复现，独立参照仪器适用于目标工况。控制器的湿度目标值不能充当实测参照。",
+      "reasoning": [
+        {
+          "title": "材料披露",
+          "text": "传感器同时读取壳体、壳体受冷却部件影响的区域和腔内循环空气的温度。控制器用这三处温度估算腔内湿度，再与控制器预设的湿度目标值比较。",
+          "evidence": [
+            "E2"
+          ]
+        },
+        {
+          "title": "方案差异",
+          "text": "同一烹饪背景下，比较对象的信号用途不同。",
+          "evidence": [
+            "E02",
+            "E2"
+          ]
+        },
+        {
+          "title": "可能能力",
+          "text": "估算腔内湿度的变化。",
+          "evidence": [
+            "E2"
+          ]
+        },
+        {
+          "title": "成立条件",
+          "text": "要有温度对应关系及可信的参照读数。",
+          "evidence": [
+            "E2",
+            "参数表"
+          ]
+        },
+        {
+          "title": "尚存假设",
+          "text": "跨机型、跨风量能否维持误差要求仍待验证。",
+          "evidence": []
+        }
+      ],
+      "narrative": [
+        {
+          "heading": "从温度读数到湿度估计",
+          "text": "传感器同时读取壳体、壳体受冷却部件影响的区域和腔内循环空气的温度。控制器用这三处温度估算腔内湿度，再与控制器预设的湿度目标值比较。",
+          "evidence": [
+            "E2"
+          ]
+        },
+        {
+          "heading": "实施例里第三路温度怎样选",
+          "text": "权利要求 1 要求同步读取三个传感器，目标湿度是与水蒸气露点对应的预定值。说明书 [0021] 开头定义了食物温度 T1 和容器温度 T2。[0022] 把二者中选定的一路与 T3、T4 组合，用经验关系把传热与湿度联系起来。[0023] 举的是选 T1 的公式。",
+          "evidence": [
+            "E2"
+          ]
+        }
+      ],
+      "conditions": [
+        {
+          "if": "若参照读数可靠且有限工况下误差可接受，",
+          "then": "扩大验证工况。"
+        }
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "E02",
+      "title": "蒸汽经过旁路腔时测温",
+      "summary": "在蒸汽烹饪模式，阀门关闭。当腔内压力高于环境压力或风机运行时，部分蒸汽从腔壁开口进入旁路腔，也就是引出少量蒸汽供测量的小腔。传感器测量引出蒸汽的温度，控制器可以据此调整蒸汽注入或注入温度。",
+      "source_role": "专利公开披露",
+      "kind": "专利公开披露",
+      "origin": "Electrolux Home Products Corporation N.V. · EP1975516A1",
+      "in_sample": true,
+      "location": "图 4、说明书 [0029]、[0038]",
+      "disclosure": "在蒸汽烹饪模式，阀门关闭。当腔内压力高于环境压力或风机运行时，部分蒸汽从腔壁开口进入旁路腔，也就是引出少量蒸汽供测量的小腔。传感器测量引出蒸汽的温度，控制器可以据此调整蒸汽注入或注入温度。",
+      "limitation": "本件披露的是蒸汽温度反馈，未取得该配置估算腔内湿度的性能数据。",
+      "record_ids": [
+        "P1"
+      ],
+      "directions": [
+        "D1"
+      ],
+      "documents": [
+        {
+          "number": "EP1975516A1",
+          "url": "https://data.epo.org/publication-server/rest/v1.2/publication-dates/20081001/patents/EP1975516NWA1/document.pdf",
+          "locations": [
+            {
+              "statement": "在蒸汽烹饪模式，阀门关闭。当腔内压力高于环境压力或风机运行时，部分蒸汽从腔壁开口进入旁路腔，也就是引出少量蒸汽供测量的小腔。传感器测量引出蒸汽的温度，控制器可以据此调整蒸汽注入或注入温度。",
+              "locator": "图 4、说明书 [0029]、[0038]"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "E2",
+      "title": "用三个位置的温度估算湿度",
+      "summary": "传感器同时读取壳体、壳体受冷却部件影响的区域和腔内循环空气的温度。控制器用这三处温度估算腔内湿度，再与控制器预设的湿度目标值比较。",
+      "source_role": "专利公开披露",
+      "kind": "专利公开披露",
+      "origin": "Arçelik Anonim Sirketi · EP4579134A1",
+      "in_sample": true,
+      "location": "权利要求 1、说明书 [0022]–[0023]",
+      "disclosure": "传感器同时读取壳体、壳体受冷却部件影响的区域和腔内循环空气的温度。控制器用这三处温度估算腔内湿度，再与控制器预设的湿度目标值比较。",
+      "limitation": "经验关系的描述无法给出在我方机型上的误差，也不能证明已经量产。",
+      "record_ids": [
+        "P2"
+      ],
+      "directions": [
+        "D1"
+      ],
+      "documents": [
+        {
+          "number": "EP4579134A1",
+          "url": "https://data.epo.org/publication-server/rest/v1.2/publication-dates/20250702/patents/EP4579134NWA1/document.pdf",
+          "locations": [
+            {
+              "statement": "传感器同时读取壳体、壳体受冷却部件影响的区域和腔内循环空气的温度。控制器用这三处温度估算腔内湿度，再与控制器预设的湿度目标值比较。",
+              "locator": "权利要求 1、说明书 [0022]–[0023]"
+            },
+            {
+              "locator": "权利要求 1",
+              "statement": "传感器同时读取壳体、壳体受冷却部件影响的区域和腔内循环空气的温度。控制器用这三处温度估算腔内湿度，再与控制器预设的湿度目标值比较。"
+            },
+            {
+              "locator": "说明书 [0021]–[0023]",
+              "statement": "权利要求 1 要求同步读取三个传感器，目标湿度是与水蒸气露点对应的预定值。说明书 [0021] 开头定义了食物温度 T1 和容器温度 T2。[0022] 把二者中选定的一路与 T3、T4 组合，用经验关系把传热与湿度联系起来。[0023] 举的是选 T1 的公式。"
+            },
+            {
+              "locator": "权利要求 1、说明书 [0021]–[0023]",
+              "statement": "传感器同时读取壳体、壳体受冷却部件影响的区域和腔内循环空气的温度。控制器用这三处温度估算腔内湿度，再与控制器预设的湿度目标值比较。权利要求 1 要求同步读取三个传感器，目标湿度是与水蒸气露点对应的预定值。说明书 [0021] 开头定义了食物温度 T1 和容器温度 T2。[0022] 把二者中选定的一路与 T3、T4 组合，用经验关系把传热与湿度联系起来。[0023] 举的是选 T1 的公式。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "参数表",
+      "title": "相对湿度和含湿量各表示什么",
+      "summary": "相对湿度把水蒸气分压与当前温度下的饱和蒸气压作比。含湿量则表示水蒸气质量与干空气质量之比。",
+      "source_role": "仪器使用手册",
+      "kind": "仪器使用手册",
+      "origin": "Vaisala · HM40 系列使用手册",
+      "in_sample": false,
+      "location": "Parameters 表，Relative humidity 与 Mixing ratio 两行",
+      "disclosure": "相对湿度把水蒸气分压与当前温度下的饱和蒸气压作比。含湿量则表示水蒸气质量与干空气质量之比。",
+      "limitation": "这张表只说明物理量，无法据此认定手持仪器适合高温蒸汽腔。",
+      "record_ids": [
+        "M1"
+      ],
+      "directions": [
+        "D1"
+      ],
+      "documents": [
+        {
+          "number": "M211088EN-D",
+          "url": "https://docs.vaisala.com/r/M211088EN-D/en-US/GUID-F1EB60A0-9D47-4257-B24D-142DAE551AFA",
+          "locations": [
+            {
+              "statement": "相对湿度把水蒸气分压与当前温度下的饱和蒸气压作比。含湿量则表示水蒸气质量与干空气质量之比。",
+              "locator": "Parameters 表，Relative humidity 与 Mixing ratio 两行"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "recommendations": [
+    {
+      "id": "A1",
+      "direction_id": "D1",
+      "action_kind": "engineering_validation",
+      "stance": "advance",
+      "horizon_ids": [
+        "near"
+      ],
+      "conditions": "先确认独立参照适用的温度和压力范围，由项目方在试验前约定允许误差、延迟和最低改善幅度。当前尚未确定这些阈值。",
+      "check": "试验前选定第三路用 T1（食物温度）或 T2（容器温度），记录另外两路测点、经验系数的标定数据和未用于标定的测试工况。用独立参照分别比较单点与三点估算的误差、延迟和重复性。",
+      "change_condition": "若相同工况下误差无改善或延迟超过项目允许值，停止增加测点。",
+      "evidence": [
+        "E2"
+      ],
+      "comparator": {
+        "name": "仅用腔内温度的简单估算",
+        "mechanism": "以同一目标机型的腔内温度作为单一输入，使用相同数据和参照评估。",
+        "basis_type": "engineering_baseline",
+        "evidence": []
+      },
+      "elimination": {
+        "trigger": "若多点输入在代表工况没有增量收益，",
+        "action": "保留单一输入的简单基线。"
+      },
+      "first_read": {
+        "mechanism": "在目标机型上，简单做法只读腔内温度；候选把另外两路测温也纳入估算，拟识别单点读数分不出的湿度差别。",
+        "comparison": "在相同风量和负载下，把单点与三点估算分别同独立湿度参照比较，记录误差和延迟。第三路测食物还是容器，在试验前选定。",
+        "decision": "如果增加测点仍无改善，或延迟超过试验前约定的允许值，就保留单点估算。"
+      }
+    },
+    {
+      "id": "A2",
+      "direction_id": "D1",
+      "action_kind": "capability_reserve",
+      "stance": "advance",
+      "horizon_ids": [
+        "reserve"
+      ],
+      "conditions": "若后续机型也有湿度控制需求，保存测点、参照量、风量和负载信息。",
+      "check": "以机型和工况归档测点位置图、风量与负载、带时间戳的参照数据、标定方法和误差记录，供第二台机型按同一口径复测。",
+      "change_condition": "若只有单一机型有效，缩为机型专用标定。",
+      "evidence": [
+        "E2"
+      ],
+      "alternative": "可以只保留数据和误差评测，不立即投入通用模型。",
+      "review_trigger": "另一机型完成同一套参照测量时复评。",
+      "first_read": {
+        "mechanism": "保存各测点的位置和同步参照读数，供另一机型复用标定方法。",
+        "comparison": "按同一风量和负载记录第二台机型相对独立参照的误差，与第一台的误差一起核对。",
+        "decision": "如果只有第一台机型符合约定误差，就保留机型专用标定，暂缓通用模型。"
+      }
+    }
+  ],
+  "timeline": [
+    {
+      "date": "2008-10-01",
+      "date_type": "publication",
+      "document_id": "EP1975516A1",
+      "attribution": "Electrolux Home Products Corporation N.V.",
+      "title": "蒸汽经过旁路腔时测温",
+      "change": "在蒸汽烹饪模式，阀门关闭。当腔内压力高于环境压力或风机运行时，部分蒸汽从腔壁开口进入旁路腔，也就是引出少量蒸汽供测量的小腔。传感器测量引出蒸汽的温度，控制器可以据此调整蒸汽注入或注入温度。",
+      "locator": "图 4、说明书 [0029]、[0038]",
+      "evidence": [
+        "E02"
+      ],
+      "route_ids": [
+        "R1"
+      ]
+    },
+    {
+      "date": "2025-07-02",
+      "date_type": "publication",
+      "document_id": "EP4579134A1",
+      "attribution": "Arçelik Anonim Sirketi",
+      "title": "用三个位置的温度估算湿度",
+      "change": "传感器同时读取壳体、壳体受冷却部件影响的区域和腔内循环空气的温度。控制器用这三处温度估算腔内湿度，再与控制器预设的湿度目标值比较。权利要求 1 要求同步读取三个传感器，目标湿度是与水蒸气露点对应的预定值。说明书 [0021] 开头定义了食物温度 T1 和容器温度 T2。[0022] 把二者中选定的一路与 T3、T4 组合，用经验关系把传热与湿度联系起来。[0023] 举的是选 T1 的公式。",
+      "locator": "权利要求 1、说明书 [0021]–[0023]",
+      "evidence": [
+        "E2"
+      ],
+      "route_ids": [
+        "R2"
+      ]
+    }
+  ],
+  "reader_contract": {
+    "version": 1,
+    "as_of": "2026-11-18",
+    "primary_role": "rd",
+    "purpose": "蒸汽烤箱需要估计湿度时，有哪些可验证的做法和值得提前积累的能力？",
+    "scope": "这是两件公开申请及一份参数手册的限定材料复现。资料不含行业检索全集、产品采用记录或样机试验。",
+    "common_boundary": "专利结构披露只支持机制比较，市场采用与目标机型效果均未知。",
+    "market_search": {
+      "permission": "not_requested",
+      "performed": false,
+      "statement": "本例使用固定技术资料，未作市场调查。"
+    },
+    "questions": [
+      {
+        "id": "Q1",
+        "question": "近期先验证什么？",
+        "answer": "近期先比较三点温度估算与仅用腔内气温的简单方案。用同一批工况、相同参考量与采样时刻核对误差和响应时间，再决定要不要接入控制。",
+        "boundary": "试验尚未执行，性能门槛由项目方确认。",
+        "status": "answered",
+        "evidence_ids": [
+          "E2",
+          "参数表"
+        ]
+      },
+      {
+        "id": "Q2",
+        "question": "中长期先积累什么？",
+        "answer": "中长期先保留能跨机型复用的标定数据和评测方法。只有另一机型也表现出稳定收益，才扩大投入。",
+        "boundary": "尚无跨机型数据，不能承诺迁移效果。",
+        "status": "answered",
+        "evidence_ids": [
+          "E2"
+        ]
+      }
+    ],
+    "role_guides": {
+      "rd": {
+        "question": "应先判断哪一个工程未知？",
+        "answer": "近期先比较三点温度估算与仅用腔内气温的简单方案。用同一批工况、相同参考量与采样时刻核对误差和响应时间，再决定要不要接入控制。",
+        "focus": "先核第 4 章的信号用途，再看第 8、9 章的可比条件。",
+        "evidence_ids": [
+          "E2",
+          "参数表"
+        ]
+      }
+    }
+  },
+  "method_support": {
+    "version": 1,
+    "research_check": {
+      "status": "ready",
+      "data_version": "steam-oven-public-materials-2",
+      "content_review": "复现固定材料中的两处公开配置，核对手册的物理量定义。企业内部资料和实测仍缺。",
+      "reading_review": "每项工程判断标出原文、条件与未验证的部分。"
+    }
+  },
+  "foresight": {
+    "version": 2,
+    "scope": "full",
+    "search_scope": "只核对本例列出的两件欧洲公开申请及一份参数手册。未开展跨地区系统检索。",
+    "family_rule": "限定材料未核对完整优先权组，相关同族及覆盖族未统计。",
+    "history_boundary": "两件文献的公开时间分别是 2008-10-01 和 2025-07-02。中间年份没有系统补查，不能据此判断行业更替或采用率。",
+    "horizons": [
+      {
+        "id": "near",
+        "window": "从 2026-11-18 起算的 1—3 年",
+        "question_id": "Q1",
+        "status": "assessed_with_recommendations",
+        "reason": "本轮要消除的是估算在目标工况是否可靠这一工程未知。",
+        "recommendation_ids": [
+          "A1"
+        ]
+      },
+      {
+        "id": "reserve",
+        "window": "从 2026-11-18 起算的 3—5 年及以后",
+        "question_id": "Q2",
+        "status": "assessed_with_recommendations",
+        "reason": "跨机型比较需要积累一致标定的数据，基础准备可以现在开始。",
+        "recommendation_ids": [
+          "A2"
+        ]
+      }
+    ],
+    "trends": [
+      {
+        "title": "温度信号可以支持不同的控制任务",
+        "observation": "早期文本用旁路蒸汽温度反馈，近期文本用三处温度估算湿度。",
+        "hypothesis": "若额外测点能减少目标工况下的估算误差，湿度估计可能成为控制的输入之一。",
+        "independence": "两件申请来自不同署名申请人，各自披露自己的配置。参数手册只解释物理量；三份资料均非本方案的独立性能验证。",
+        "alternative": "测点差异也可能来自控制目标不同，两种方案可以并存。",
+        "condition": "参照量可测且取样有代表性。",
+        "review_trigger": "若补查显示多测点早已在相同用途广泛存在，应调整“近期变化”的解释。",
+        "evidence": [
+          "E02",
+          "E2",
+          "参数表"
+        ]
+      }
+    ],
+    "readiness": [
+      {
+        "direction_id": "D1",
+        "bottleneck": "先确认参照测量在目标温度与压力范围内可信，否则无法判断增加两个测点有没有收益。",
+        "dimensions": {
+          "performance": {
+            "status": "partial",
+            "judgment": "已有估算机制的披露。",
+            "gap": "还缺目标机型上的误差和响应数据。",
+            "evidence": [
+              "E2"
+            ]
+          },
+          "integration": {
+            "status": "partial",
+            "judgment": "公开文本标有冷却部件及测温位置。",
+            "gap": "还缺本机安装空间、测点公差和气流记录。",
+            "evidence": [
+              "E2"
+            ]
+          },
+          "production": {
+            "status": "unknown",
+            "judgment": "供应及制造一致性未知。",
+            "gap": "需要器件和批次装配记录。",
+            "evidence": []
+          },
+          "durability": {
+            "status": "unknown",
+            "judgment": "长期漂移与清洁后稳定性未知。",
+            "gap": "需要漂移、清洁和耐久记录。",
+            "evidence": []
+          }
+        }
+      }
+    ],
+    "direction_reviews": [
+      {
+        "direction_id": "D1",
+        "target": "同时使用壳体、受冷却区域及腔内气温估算湿度。",
+        "members": [
+          {
+            "record_id": "P1",
+            "family_id": null,
+            "direct": null
+          },
+          {
+            "record_id": "P2",
+            "family_id": null,
+            "direct": null,
+            "located_finding": {
+              "evidence_id": "E2",
+              "locator": "权利要求 1",
+              "text": "这项权利要求明确写出三个传感器同步测温，控制器据此估算腔内湿度，并与预设的湿度目标比较。本方向的基本组合已经公开。本机安装、实际误差和权利范围要分别核实。"
+            }
+          }
+        ],
+        "uncounted_reason": "两件原件均定点核对，未经同族归并或整件全文复核。零份全文复核不等于零份相关披露。",
+        "search_log": "截至 2026-11-18，在欧洲专利局按公开号核对 EP1975516A1、EP4579134A1 的指定位置。本例未执行关键词检索，也未补查相邻用途。具体位置见第 13 章逐件记录。",
+        "closest": {
+          "evidence_id": "E2",
+          "document_id": "EP4579134A1",
+          "locator": "权利要求 1、说明书 [0022]–[0023]",
+          "match": "在限定的两件材料中，三处测温与目标组合最接近。",
+          "difference": "我方壳体布置和安装关系尚未确认。"
+        },
+        "structure_gap": "需要目标机型的安装图核对与受冷却位置的关系。",
+        "performance_gap": "同基线下的误差、延迟与跨机型重复性未知。",
+        "next_step": "先取得本机图纸与可用参照仪器资料，再决定是否做受控对照。",
+        "completion": "能复现测点、给出参照量和工作范围，再评审试验是否值得。",
+        "conclusion": "基本测温与估算组合已有明确公开。本机受冷测点能否按图布置、额外测点对误差有什么收益，才是本轮优先研究的问题。涉及权利限制时另按具体方案、市场及权利状态核查。"
+      }
+    ],
+    "roadmap": [
+      {
+        "id": "N1",
+        "title": "先建立可比较的参照记录",
+        "horizon_ids": [
+          "near"
+        ],
+        "requires": [],
+        "condition": "参照方法适用于实际温度和压力范围。",
+        "time_basis": "以参照可用性为条件，尚无年度完成承诺。",
+        "action": "同工况下比较简单方案和三点方案。",
+        "fallback": "无法取得可靠参照时，先调整测量方案。",
+        "evidence": [
+          "参数表",
+          "E2"
+        ]
+      },
+      {
+        "id": "N2",
+        "title": "复查第二机型上的可迁移性",
+        "horizon_ids": [
+          "reserve"
+        ],
+        "requires": [
+          "N1"
+        ],
+        "condition": "首台机型有可重复收益，且第二机型已取得可比数据。",
+        "time_basis": "依赖前一阶段和第二机型，不指定量产年份。",
+        "action": "比较是否足以支持通用标定方法。",
+        "fallback": "收益仅限单机型时保留局部模型。",
+        "evidence": [
+          "E2"
+        ]
+      }
+    ],
+    "portfolio": "资源有限时先明确参照量与测点。该结果同时决定近期对照能否成立，以及哪些数据值得长期积累。",
+    "resource_boundary": "目标机型、人员、仪器和预算均未给定。这里给出工作先后，未估算费用或工期。",
+    "update_note": "本版以已定位的公开配置和参数定义建立基线。",
+    "revisit": "取得目标机型图纸、独立参照测量或新的时期样本后，应回查第 4、5、7 至 12 章的相关判断。",
+    "scope_note": "目前只有公开的测温结构，是否能减少湿度估算误差还需在目标机型上对照。",
+    "finding_points": [
+      {
+        "label": "引出蒸汽测温",
+        "text": "较早的申请从旁路取样，测引出蒸汽的温度，用于调节蒸汽注入。",
+        "evidence": [
+          "E02"
+        ]
+      },
+      {
+        "label": "多个测点估算湿度",
+        "text": "另一件申请结合三路温度估算湿度。目标机型能否取得额外收益，还缺独立参照测量。",
+        "evidence": [
+          "E2"
+        ]
+      }
+    ]
+  }
+}

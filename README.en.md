@@ -1,6 +1,8 @@
 # R&D Compass · 研发罗盘
 
-[简体中文](README.md) · English · **v0.4.0**
+[GitHub skill package v0.7.4](https://github.com/KrisMiao97/rd-compass/releases/tag/v0.7.4) · The WorkBuddy share uses a separate release channel.
+
+[简体中文](README.md) · English · **v0.7.4**
 
 **Explain why a product needs a technology, how existing approaches work and evolve, and which product changes are worth investigating.** Choose a report structure that fits the research question.
 
