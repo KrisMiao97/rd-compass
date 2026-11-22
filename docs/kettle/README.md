@@ -36,4 +36,4 @@
 
 [返回首页，安装并试问](../../README.md#安装并试问)
 
-**[看两种滤件怎么取出来 · 专利产品三维图解](https://krismiao97.github.io/patent-review-kit/kettle-filters.html)**　转动模型，切换到“取出时”，观察固定框架、壶盖和滤件各自的位置。
+**[看两种滤件怎么取出来 · 专利产品三维图解](https://krismiao97.github.io/patent-review-kit/studio-kettle.html)**　转动模型，切换到“取出时”，观察固定框架、壶盖和滤件各自的位置。
